@@ -20,82 +20,45 @@
 package com.keepassdroid.search;
 
 import android.app.SearchManager;
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.android.keepass.KeePass;
-import com.keepassdroid.Database;
-import com.keepassdroid.GroupBaseActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.keepassdroid.GroupFragment;
+import com.keepassdroid.MainActivity;
 import com.keepassdroid.PwGroupListAdapter;
-import com.keepassdroid.app.App;
 import com.keepassdroid.view.GroupEmptyView;
 import com.keepassdroid.view.GroupViewOnlyView;
 
-public class SearchResults extends GroupBaseActivity {
-	
-	private Database mDb;
-	//private String mQuery;
+public class SearchResults extends GroupFragment {
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		if ( isFinishing() ) {
-			return;
-		}
-		
-		setResult(KeePass.EXIT_NORMAL);
-		
-		mDb = App.getDB();
-		
-		// Likely the app has been killed exit the activity 
-		if ( ! mDb.Loaded() ) {
-			finish();
-		}
 
-		performSearch(getSearchStr(getIntent()));
-		
 	}
-	
-	private void performSearch(String query) {
-		query(query.trim());
-	}
-	
-	private void query(String query) {
-		mGroup = mDb.Search(query);
 
-		if ( mGroup == null || mGroup.childEntries.size() < 1 ) {
-			setContentView(new GroupEmptyView(this));
-		} else {
-			setContentView(new GroupViewOnlyView(this));
-		}
-		
-		setGroupTitle();
-		
-		setListAdapter(new PwGroupListAdapter(this, mGroup));
-	}
-	
-	/*
 	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		
-		mQuery = getSearchStr(intent);
-		performSearch();
-		//mGroup = processSearchIntent(intent);
-		//assert(mGroup != null);
-	}
-	*/
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-	private String getSearchStr(Intent queryIntent) {
-        // get and process search query here
-        final String queryAction = queryIntent.getAction();
-        if ( Intent.ACTION_SEARCH.equals(queryAction) ) {
-        	return queryIntent.getStringExtra(SearchManager.QUERY);
+        String query = getArguments().getString(SearchManager.QUERY);
+        assert query != null;
+        query = query.trim();
+
+        mGroup = ((MainActivity) getActivity()).db.Search(getContext(), query);
+
+        View view;
+        if ( mGroup == null || mGroup.childEntries.size() < 1 ) {
+            view = new GroupEmptyView(getContext());
+        } else {
+            view = new GroupViewOnlyView(getContext());
         }
-        
-        return "";
-		
+
+        //setGroupTitle(view); TODO
+
+        setListAdapter(new PwGroupListAdapter(getContext(), mGroup));
+
+        return view;
 	}
 	
 }

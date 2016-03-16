@@ -55,7 +55,7 @@
     <string name="database">Database</string>
     <string name="decrypting_db">Dekrypterer databaseindhold&#8230;</string>
     <string name="decrypting_entry">Dekrypterer post</string>
-    <string name="default_checkbox">Brug denne database som standard</string>
+    <string name="set_default_database">Brug denne database som standard</string>
     <string name="digits">Cifre</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin comes with ABSOLUTELY NO WARRANTY; This is free software, and you are welcome to redistribute it under the conditions of the GPL version 2 or later.</string>
     <string name="ellipsis">\u2026</string>
@@ -76,7 +76,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Brugernavn: </string>
     <string name="error_arc4">"ArcFour stream cipher" er ikke understøttet.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid kan ikke håndtere denne uri.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid kan ikke håndtere denne uri.</string>
     <string name="error_could_not_create_group">Fejl ved oprettelse af gruppe.</string>
     <string name="error_could_not_create_parent">Kunne ikke oprette rodbiblioteket.</string>
     <string name="error_database_exists">Denne fil eksisterer allerede.</string>
@@ -98,7 +98,7 @@
     <string name="error_wrong_length">Angiv et positivt helt tal i feltet</string>
     <string name="field_name">Felt-navn</string>
     <string name="field_value">Felt-værdi</string>
-    <string name="FileNotFound">Filen blev ikke fundet.</string>
+    <string name="file_not_found">Filen blev ikke fundet.</string>
     <string name="file_browser">Fil-browser</string>
     <string name="generate_password">Generer adgangskode</string>
     <string name="group">Gruppe</string>
@@ -118,7 +118,7 @@
     <string name="InvalidPassword">Ugyldig adgangskode eller nøglefil.</string>
     <string name="invalid_algorithm">Ugyldig algoritme.</string>
     <string name="invalid_db_sig">Databaseformatet blev ikke genkendt.</string>
-    <string name="keyfile_does_not_exist">Nøglefil eksisterer ikke.</string>
+    <string name="key_file_not_found">Nøglefil eksisterer ikke.</string>
     <string name="keyfile_is_empty">Nøglefil er tom.</string>
     <string name="length">Længde</string>
     <string name="list_size_title">Gruppeliste størrelse</string>
@@ -128,12 +128,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Skjul adgangskode</string>
     <string name="maskpass_summary">Skjul adgangskoder som standard</string>
-    <string name="menu_about">Om</string>
+    <string name="about">Om</string>
     <string name="menu_change_key">Skift master-adgangskode</string>
     <string name="menu_copy_pass">Kopier adgangskode</string>
     <string name="menu_copy_user">Kopier brugernavn</string>
     <string name="menu_create">Opret</string>
-    <string name="menu_app_settings">Indstillinger</string>
+    <string name="settings">Indstillinger</string>
     <string name="menu_db_settings">Database indstillinger</string>
     <string name="menu_delete">Slet</string>
     <string name="menu_donate">Donér</string>
@@ -141,7 +141,7 @@
     <string name="menu_hide_password">Skjul adgangskode</string>
     <string name="menu_homepage">Gå til hjemmeside</string>
     <string name="menu_lock">Lås database</string>
-    <string name="menu_open">Åbn</string>
+    <string name="open">Åbn</string>
     <string name="menu_rename">Omdøb</string>
     <string name="menu_search">Søg</string>
     <string name="menu_showpass">Vis adgangskode</string>

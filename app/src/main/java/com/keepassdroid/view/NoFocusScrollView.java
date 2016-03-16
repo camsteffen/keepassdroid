@@ -19,12 +19,12 @@
  */
 package com.keepassdroid.view;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ScrollView;
+
+import java.util.ArrayList;
 
 public class NoFocusScrollView extends ScrollView {
 

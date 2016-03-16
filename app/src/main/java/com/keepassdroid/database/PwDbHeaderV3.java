@@ -46,9 +46,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 package com.keepassdroid.database;
 
-import java.io.IOException;
-
 import com.keepassdroid.stream.LEDataInputStream;
+
+import java.io.IOException;
 
 public class PwDbHeaderV3 extends PwDbHeader {
 
@@ -88,7 +88,7 @@ public class PwDbHeaderV3 extends PwDbHeader {
 	 * @throws IOException 
 	 */
 	public void loadFromFile( byte buf[], int offset ) throws IOException {
-		signature1 = LEDataInputStream.readInt( buf, offset + 0 );
+		signature1 = LEDataInputStream.readInt( buf, offset );
 		signature2 = LEDataInputStream.readInt( buf, offset + 4 );
 		flags = LEDataInputStream.readInt( buf, offset + 8 );
 		version = LEDataInputStream.readInt( buf, offset + 12 );

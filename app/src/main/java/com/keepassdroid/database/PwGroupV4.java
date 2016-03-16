@@ -19,6 +19,12 @@
  */
 package com.keepassdroid.database;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import com.keepassdroid.Database;
+import com.keepassdroid.GroupFragment;
+import com.keepassdroid.GroupFragmentV4;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,12 +32,12 @@ import java.util.UUID;
 public class PwGroupV4 extends PwGroup implements ITimeLogger {
 
 	//public static final int FOLDER_ICON = 48;
-	public static final boolean DEFAULT_SEARCHING_ENABLED = true;
+	static final boolean DEFAULT_SEARCHING_ENABLED = true;
 	
 	public PwGroupV4 parent = null;
 	public UUID uuid = PwDatabaseV4.UUID_ZERO;
 	public String notes = "";
-	public PwIconCustom customIcon = PwIconCustom.ZERO;
+	public UUID customIcon = PwDatabaseV4.UUID_ZERO;
 	public boolean isExpanded = true;
 	public String defaultAutoTypeSequence = "";
 	public Boolean enableAutoType = null;
@@ -66,7 +72,7 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 		AddGroup(subGroup, takeOwnership, false);
 	}
 	
-	public void AddGroup(PwGroupV4 subGroup, boolean takeOwnership, boolean updateLocationChanged) {
+	private void AddGroup(PwGroupV4 subGroup, boolean takeOwnership, boolean updateLocationChanged) {
 		if ( subGroup == null ) throw new RuntimeException("subGroup");
 		
 		childGroups.add(subGroup);
@@ -81,7 +87,7 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 		AddEntry(pe, takeOwnership, false);
 	}
 	
-	public void AddEntry(PwEntryV4 pe, boolean takeOwnership, boolean updateLocationChanged) {
+	private void AddEntry(PwEntryV4 pe, boolean takeOwnership, boolean updateLocationChanged) {
 		assert(pe != null);
 		
 		childEntries.add(pe);
@@ -96,23 +102,23 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 		return parent;
 	}
 	
-	public void buildChildGroupsRecursive(List<PwGroup> list) {
+	void buildChildGroupsRecursive(List<PwGroup> list) {
 		list.add(this);
-		
-		for ( int i = 0; i < childGroups.size(); i++) {
-			PwGroupV4 child = (PwGroupV4) childGroups.get(i);
+
+		for (PwGroup childGroup : childGroups) {
+			PwGroupV4 child = (PwGroupV4) childGroup;
 			child.buildChildGroupsRecursive(list);
-			
+
 		}
 	}
 
-	public void buildChildEntriesRecursive(List<PwEntry> list) {
-		for ( int i = 0; i < childEntries.size(); i++ ) {
-			list.add(childEntries.get(i));
+	void buildChildEntriesRecursive(List<PwEntry> list) {
+		for (PwEntry childEntry : childEntries) {
+			list.add(childEntry);
 		}
-		
-		for ( int i = 0; i < childGroups.size(); i++ ) {
-			PwGroupV4 child = (PwGroupV4) childGroups.get(i);
+
+		for (PwGroup childGroup : childGroups) {
+			PwGroupV4 child = (PwGroupV4) childGroup;
 			child.buildChildEntriesRecursive(list);
 		}
 		
@@ -132,11 +138,6 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public Date getLastMod() {
-		return parentGroupLastMod;
 	}
 
 	public Date getCreationTime() {
@@ -205,11 +206,11 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 	}
 
 	@Override
-	public PwIcon getIcon() {
-		if (customIcon == null || customIcon.uuid.equals(PwDatabaseV4.UUID_ZERO)) {
-			return super.getIcon();
+	public PwIcon getIcon(Database db) {
+		if (customIcon == null || customIcon.equals(PwDatabaseV4.UUID_ZERO)) {
+			return super.getIcon(db);
 		} else {
-			return customIcon;
+			return ((PwDatabaseV4) db.pm).customIcons.get(customIcon); // TODO
 		}
 	}
 	
@@ -219,8 +220,8 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 		
 		lastAccess = lastMod = creation = parentGroupLastMod = new Date();
 	}
-	
-	public boolean isSearchEnabled() {
+
+	boolean isSearchEnabled() {
 		PwGroupV4 group = this;
 		while (group != null) {
 			Boolean search = group.enableSearching;
@@ -235,4 +236,12 @@ public class PwGroupV4 extends PwGroup implements ITimeLogger {
 		return true;
 	}
 
+	@Override
+	public Fragment createFragment() {
+		GroupFragment fragment = new GroupFragmentV4();
+		Bundle args = new Bundle();
+		args.putSerializable(GroupFragment.KEY_ENTRY, uuid);
+		fragment.setArguments(args);
+		return fragment;
+	}
 }

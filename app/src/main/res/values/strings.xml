@@ -56,19 +56,17 @@
     <string name="database">Database</string>
     <string name="decrypting_db">Decrypting database contents&#8230;</string>
     <string name="decrypting_entry">Decrypting entry</string>
-    <string name="default_checkbox">Use this as my default database</string>
+    <string name="set_default_database">Set as default database</string>
     <string name="digits">Digits</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin comes with ABSOLUTELY NO WARRANTY; This is free software, and you are welcome to redistribute it under the conditions of the GPL version 2 or later.</string>
     <string name="ellipsis">\u2026</string>
     <string name="enter_filename">Enter database filename:</string>
     <string name="entry_accessed">Accessed: </string>
-    <string name="entry_and_or">Enter a password and/or a key file to unlock your database:</string>
     <string name="entry_cancel">Cancel</string>
     <string name="entry_comment">Comments: </string>
     <string name="entry_confpassword">Confirm password:</string>
     <string name="entry_created">Created: </string>
     <string name="entry_expires">Expires: </string>
-    <string name="entry_keyfile">Key file (optional)</string>
     <string name="entry_modified">Modified: </string>
     <string name="entry_not_found">Entry data not found.</string>
     <string name="entry_password">Password:</string>
@@ -77,7 +75,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">User Name: </string>
     <string name="error_arc4">The ArcFour stream cipher is not supported.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid cannot handle this uri.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid cannot handle this uri.</string>
     <string name="error_could_not_create_group">Error creating group.</string>
     <string name="error_could_not_create_parent">Could not create parent directory.</string>
     <string name="error_database_exists">This file already exists.</string>
@@ -99,7 +97,8 @@
     <string name="error_wrong_length">Enter a positive integer on length field</string>
     <string name="field_name">Field Name</string>
     <string name="field_value">Field value</string>
-    <string name="FileNotFound">File not found.</string>
+    <string name="file_not_found">File not found</string>
+    <string name="file_not_found_name">File not found: %s</string>
     <string name="file_not_found_content">File not found. Try reopening from your content provider.</string>
     <string name="file_browser">File Browser</string>
     <string name="generate_password">Generate Password</string>
@@ -117,11 +116,11 @@
     <string name="hint_username">username</string>
     <string name="install_from_market">Install from Play Store</string>
     <string name="install_from_website">Install from Web</string>
-    <string name="InvalidPassword">Invalid password or key file.</string>
+    <string name="InvalidPassword">Invalid password or key file</string>
     <string name="invalid_algorithm">Invalid algorithm.</string>
-    <string name="invalid_db_sig">Database format not recognized.</string>
-    <string name="keyfile_does_not_exist">Key file does not exist.</string>
-    <string name="keyfile_is_empty">Key file is empty.</string>
+    <string name="invalid_db_sig">Database format not recognized</string>
+    <string name="key_file_not_found">Key file not found</string>
+    <string name="keyfile_is_empty">Key file is empty</string>
     <string name="length">Length</string>
     <string name="list_size_title">Group list size</string>
     <string name="list_size_summary">Text size in the group list</string>
@@ -130,12 +129,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Mask password</string>
     <string name="maskpass_summary">Hide passwords by default</string>
-    <string name="menu_about">About</string>
+    <string name="about">About</string>
     <string name="menu_change_key">Change Master Key</string>
     <string name="menu_copy_pass">Copy Password</string>
     <string name="menu_copy_user">Copy User</string>
     <string name="menu_create">Create</string>
-    <string name="menu_app_settings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="menu_db_settings">Database settings</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_donate">Donate</string>
@@ -143,7 +142,7 @@
     <string name="menu_hide_password">Hide Pass</string>
     <string name="menu_homepage">Go to Homepage</string>
     <string name="menu_lock">Lock Database</string>
-    <string name="menu_open">Open</string>
+    <string name="open">Open</string>
     <string name="menu_rename">Rename</string>
     <string name="menu_search">Search</string>
     <string name="menu_showpass">Show pass</string>
@@ -156,7 +155,6 @@
     <string name="open_recent">Open recent database (click to open):</string>
     <string name="omitbackup_title">Don\'t search backup entries</string>
     <string name="omitbackup_summary">Omit \'Backup\' group from search results (applies to .kdb only)</string>
-    <string name="pass_filename">KeePass database filename:</string>
     <string name="password_title">Enter database password</string>
     <string name="progress_create">Creating new database&#8230;</string>
     <string name="progress_title">Working&#8230;</string>
@@ -194,7 +192,20 @@
     <string name="warning_read_only">Your sd card is currently read-only. You may not be able to save changes to your database.</string>
     <string name="warning_unmounted">Your sd card is not currently mounted on your device. You will not be able to load or create your database.</string>
     <string name="version_label">Version:</string>
-    
+    <string name="open_database">Open Database</string>
+    <string name="create_database">Create Database</string>
+    <string name="recent_databases">Recent Databases</string>
+    <string name="error_too_many_databases">Too many databases have been created</string>
+    <string name="drawer_open">open drawer</string>
+    <string name="drawer_close">close drawer</string>
+    <string name="add_key_file">Add Key File</string>
+    <string name="clear_key_file">clear key file</string>
+    <string name="no_app_found">No Suitable App Found</string>
+    <string name="no_app_found_msg">You need to install a file manager app or a content provider to locate and open a file.</string>
+    <string name="error_no_read_permission">KeePassDroid does not have permission to read %s</string>
+    <string name="error_opening_database">Error opening database</string>
+    <string name="database_file_not_found">Database file not found</string>
+
     <string-array name="clipboard_timeout_options">
     	<item>30 seconds</item>
     	<item>1 minute</item>

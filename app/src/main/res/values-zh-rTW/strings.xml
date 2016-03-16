@@ -48,7 +48,7 @@
     <string name="database">資料庫</string>
     <string name="decrypting_db">解密資料庫內容中&#8230;</string>
     <string name="decrypting_entry">解密條目中</string>
-    <string name="default_checkbox">使用這做為我的默認資料庫</string>
+    <string name="set_default_database">使用這做為我的默認資料庫</string>
     <string name="digits">數字</string>
     <string name="disclaimer_formal">KeePassDroid版權歸Brian Pellin；軟體不帶有絕對擔保；是自由軟體，您可在遵循GPL 2或者更高版本的情況下重新發佈。中文簡繁體翻譯：wangkf@gmail.com</string>
     <string name="ellipsis">\u2026</string>
@@ -68,7 +68,7 @@
     <string name="entry_url">網址：</string>
     <string name="entry_user_name">用戶名：</string>
     <string name="error_arc4">ArcFour流密碼不被支援。</string>
-    <string name="error_can_not_handle_uri">KeePassDroid無法處理此URI。</string>
+    <string name="error_cannot_handle_uri">KeePassDroid無法處理此URI。</string>
     <string name="error_could_not_create_group">創建群組錯誤。</string>
     <string name="error_could_not_create_parent">無法創建上級目錄。</string>
     <string name="error_database_exists">文件已存在。</string>
@@ -87,7 +87,7 @@
     <string name="error_rounds_too_large">次數太大。最大設置到2147483648。</string>
     <string name="error_title_required">標題是必填項。</string>
     <string name="error_wrong_length">長度欄位輸入一個正整數</string>
-    <string name="FileNotFound">文件未找到。</string>
+    <string name="file_not_found">文件未找到。</string>
     <string name="file_browser">檔流覽</string>
     <string name="generate_password">生成密碼</string>
     <string name="group">群組</string>
@@ -114,12 +114,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">密碼掩膜</string>
     <string name="maskpass_summary">默認隱藏密碼</string>
-    <string name="menu_about">關於</string>
+    <string name="about">關於</string>
     <string name="menu_change_key">改變主密鑰</string>
     <string name="menu_copy_pass">複製密碼</string>
     <string name="menu_copy_user">複製用戶</string>
     <string name="menu_create">創建</string>
-    <string name="menu_app_settings">設置</string>
+    <string name="settings">設置</string>
     <string name="menu_db_settings">資料庫設置</string>
     <string name="menu_delete">刪除</string>
     <string name="menu_donate">捐贈</string>
@@ -127,7 +127,7 @@
     <string name="menu_hide_password">隱藏密碼</string>
     <string name="menu_homepage">到主頁</string>
     <string name="menu_lock">鎖定資料庫</string>
-    <string name="menu_open">打開</string>
+    <string name="open">打開</string>
     <string name="menu_rename">重命名</string>
     <string name="menu_search">搜索</string>
     <string name="menu_url">到網址</string>

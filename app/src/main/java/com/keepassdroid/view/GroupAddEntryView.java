@@ -23,7 +23,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
-
 import com.android.keepass.R;
 
 public class GroupAddEntryView extends RelativeLayout {

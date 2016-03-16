@@ -19,12 +19,6 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.security.DigestOutputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import com.keepassdroid.database.PwDatabaseV4;
 import com.keepassdroid.database.PwDbHeader;
 import com.keepassdroid.database.PwDbHeaderV4;
@@ -32,6 +26,12 @@ import com.keepassdroid.database.PwDbHeaderV4.PwDbHeaderV4Fields;
 import com.keepassdroid.database.exception.PwDbOutputException;
 import com.keepassdroid.stream.LEDataOutputStream;
 import com.keepassdroid.utils.Types;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class PwDbHeaderOutputV4 extends PwDbHeaderOutput {
 	private PwDbHeaderV4 header;

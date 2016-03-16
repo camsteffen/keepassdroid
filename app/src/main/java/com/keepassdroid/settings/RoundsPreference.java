@@ -21,17 +21,14 @@ package com.keepassdroid.settings;
 
 
 import android.content.Context;
-import android.os.Handler;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.keepass.R;
 import com.keepassdroid.Database;
 import com.keepassdroid.ProgressTask;
-import com.keepassdroid.app.App;
 import com.keepassdroid.database.PwDatabase;
 import com.keepassdroid.database.edit.OnFinish;
 import com.keepassdroid.database.edit.SaveDB;
@@ -41,22 +38,19 @@ public class RoundsPreference extends DialogPreference {
 	private PwDatabase mPM;
 	private TextView mRoundsView;
 
+	Database db;
+
 	@Override
 	protected View onCreateDialogView() {
 		View view =  super.onCreateDialogView();
 		
 		mRoundsView = (TextView) view.findViewById(R.id.rounds);
-		
-		Database db = App.getDB();
+
 		mPM = db.pm;
 		long numRounds = mPM.getNumRounds();
 		mRoundsView.setText(Long.toString(numRounds));
 		
 		return view;
-	}
-
-	public RoundsPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
 	}
 
 	public RoundsPreference(Context context, AttributeSet attrs, int defStyle) {
@@ -89,9 +83,8 @@ public class RoundsPreference extends DialogPreference {
 				Toast.makeText(getContext(), R.string.error_rounds_too_large, Toast.LENGTH_LONG).show();
 				mPM.setNumRounds(Integer.MAX_VALUE);
 			}
-			
-			Handler handler = new Handler();
-			SaveDB save = new SaveDB(getContext(), App.getDB(), new AfterSave(getContext(), handler, oldRounds));
+
+			SaveDB save = new SaveDB(getContext(), db, new AfterSave(getContext(), oldRounds));
 			ProgressTask pt = new ProgressTask(getContext(), save, R.string.saving_database);
 			pt.run();
 			
@@ -103,9 +96,7 @@ public class RoundsPreference extends DialogPreference {
 		private long mOldRounds;
 		private Context mCtx;
 		
-		public AfterSave(Context ctx, Handler handler, long oldRounds) {
-			super(handler);
-			
+		AfterSave(Context ctx, long oldRounds) {
 			mCtx = ctx;
 			mOldRounds = oldRounds;
 		}

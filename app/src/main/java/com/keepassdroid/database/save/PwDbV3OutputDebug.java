@@ -19,14 +19,14 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.OutputStream;
-import java.security.SecureRandom;
-
 import com.keepassdroid.database.PwDatabaseV3;
 import com.keepassdroid.database.PwDatabaseV3Debug;
 import com.keepassdroid.database.PwDbHeader;
 import com.keepassdroid.database.PwDbHeaderV3;
 import com.keepassdroid.database.exception.PwDbOutputException;
+
+import java.io.OutputStream;
+import java.security.SecureRandom;
 
 public class PwDbV3OutputDebug extends PwDbV3Output {
 	PwDatabaseV3Debug debugDb;

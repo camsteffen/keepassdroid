@@ -22,7 +22,6 @@ package com.keepassdroid.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.android.keepass.R;
 
 public class PrefsUtil {

@@ -19,16 +19,12 @@
  */
 package com.keepassdroid.utils;
 
+import com.keepassdroid.database.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
-
-import com.keepassdroid.database.PwDatabase;
-import com.keepassdroid.database.PwDatabaseV4;
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwEntryV4;
-import com.keepassdroid.database.SearchParametersV4;
 
 public class SprEngineV4 extends SprEngine {
 	private final int MAX_RECURSION_DEPTH = 12;

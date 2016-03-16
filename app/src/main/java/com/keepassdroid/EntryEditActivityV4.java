@@ -19,41 +19,30 @@
  */
 package com.keepassdroid;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.*;
+import com.android.keepass.R;
+import com.keepassdroid.database.*;
+import com.keepassdroid.database.security.ProtectedString;
+import com.keepassdroid.utils.Types;
+import com.keepassdroid.view.EntryEditSection;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.keepass.R;
-import com.keepassdroid.app.App;
-import com.keepassdroid.database.PwDatabaseV4;
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwEntryV4;
-import com.keepassdroid.database.PwGroupId;
-import com.keepassdroid.database.PwGroupIdV4;
-import com.keepassdroid.database.PwGroupV4;
-import com.keepassdroid.database.security.ProtectedString;
-import com.keepassdroid.utils.Types;
-import com.keepassdroid.view.EntryEditSection;
-
 public class EntryEditActivityV4 extends EntryEditActivity {
 	
 	private ScrollView scroll;
 	private LayoutInflater inflater;
+
+	Database db; // TODO
 
 	protected static void putParentId(Intent i, String parentKey, PwGroupV4 parent) {
 		PwGroupId id = parent.getId();
@@ -142,7 +131,7 @@ public class EntryEditActivityV4 extends EntryEditActivity {
 	protected PwEntry populateNewEntry() {
 		PwEntryV4 newEntry = (PwEntryV4) mEntry.clone(true);
 		newEntry.history = (ArrayList<PwEntryV4>) newEntry.history.clone();
-		newEntry.createBackup((PwDatabaseV4)App.getDB().pm);
+		newEntry.createBackup((PwDatabaseV4)db.pm);
 		
 		newEntry = (PwEntryV4) super.populateNewEntry(newEntry);
 		

@@ -48,7 +48,7 @@
     <string name="database">Database</string>
     <string name="decrypting_db">Dekrypterer databasen …</string>
     <string name="decrypting_entry">Dekrypterer oppføringa</string>
-    <string name="default_checkbox">Standarddatabasen</string>
+    <string name="set_default_database">Standarddatabasen</string>
     <string name="digits">Tal</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin kjem med INGEN SOM HELST GARANTI. Dette er eit fritt program. Du er velkomen til å redistribuera det i samsvar med vilkåra til GPL utgåve 2 eller nyare.</string>
     <string name="ellipsis">\u2026</string>
@@ -68,7 +68,7 @@
     <string name="entry_url">Adresse: </string>
     <string name="entry_user_name">Brukaramn: </string>
     <string name="error_arc4">Kan ikkje bruka ArcFour dataflytkryptering.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid kan ikkje bruka denne ressursen.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid kan ikkje bruka denne ressursen.</string>
     <string name="error_could_not_create_group">Klarte ikkje å laga gruppa.</string>
     <string name="error_could_not_create_parent">Klarte ikkje å laga foreldrekatalogen.</string>
     <string name="error_database_exists">Denne fila finst allereie.</string>
@@ -87,7 +87,7 @@
     <string name="error_rounds_too_large">For mange omgangar. Bruker 2147483648.</string>
     <string name="error_title_required">Treng ein tittel.</string>
     <string name="error_wrong_length">Bruk eit positivt heiltal i lengdfeltet</string>
-    <string name="FileNotFound">Fann ikkje fila.</string>
+    <string name="file_not_found">Fann ikkje fila.</string>
     <string name="file_browser">Filbehandlar</string>
     <string name="generate_password">Lag passord</string>
     <string name="group">Gruppe</string>
@@ -114,12 +114,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Masker passord</string>
     <string name="maskpass_summary">Gøym passorda (standardval)</string>
-    <string name="menu_about">Om</string>
+    <string name="about">Om</string>
     <string name="menu_change_key">Endra hovudnøkkelen</string>
     <string name="menu_copy_pass">Kopier passordet</string>
     <string name="menu_copy_user">Kopier brukaren</string>
     <string name="menu_create">Lag</string>
-    <string name="menu_app_settings">Innstillingar</string>
+    <string name="settings">Innstillingar</string>
     <string name="menu_db_settings">Databaseinnstillingar</string>
     <string name="menu_delete">Slett</string>
     <string name="menu_donate">Doner</string>
@@ -127,7 +127,7 @@
     <string name="menu_hide_password">Gøym passordet</string>
     <string name="menu_homepage">Gå til heimesida</string>
     <string name="menu_lock">Lås databasen</string>
-    <string name="menu_open">Opna</string>
+    <string name="open">Opna</string>
     <string name="menu_rename">Gje nytt namn</string>
     <string name="menu_search">Søk</string>
     <string name="menu_showpass">Syn passordet</string>

@@ -28,8 +28,6 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-
-import com.keepassdroid.app.App;
 import com.keepassdroid.intents.Intents;
 
 public class TimeoutService extends Service {
@@ -66,7 +64,6 @@ public class TimeoutService extends Service {
 
 	private void timeout(Context context) {
 		Log.d(TAG, "Timeout");
-		App.setShutdown();
 		
 		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		nm.cancelAll();

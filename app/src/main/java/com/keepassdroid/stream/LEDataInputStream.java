@@ -153,11 +153,7 @@ public class LEDataInputStream extends InputStream {
 		+ (((long)buf[offset + 6] & 0xFF) << 48) + (((long)buf[offset + 7] & 0xFF) << 56);
 	}
 
-	public static long readUInt( byte buf[], int offset ) {
-		  return (readInt(buf, offset) & INT_TO_LONG_MASK);
-	  }
-
-	public static int readInt(InputStream is) throws IOException {
+    public static int readInt(InputStream is) throws IOException {
 		  byte[] buf = new byte[4];
 	
 		  is.read(buf, 0, 4);

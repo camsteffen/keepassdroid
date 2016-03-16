@@ -19,11 +19,9 @@
  */
 package com.keepassdroid;
 
-import com.keepassdroid.compat.BuildCompat;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager.LayoutParams;
+import com.keepassdroid.compat.BuildCompat;
 
 /** 
  * Locking Close Activity that sets FLAG_SECURE to prevent screenshots, and from
@@ -31,7 +29,7 @@ import android.view.WindowManager.LayoutParams;
  * @author Brian Pellin
  *
  */
-public abstract class LockCloseHideActivity extends LockCloseActivity {
+public abstract class LockCloseHideActivity extends LockingActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

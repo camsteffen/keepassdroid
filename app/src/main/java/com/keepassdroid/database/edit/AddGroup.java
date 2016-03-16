@@ -20,7 +20,6 @@
 package com.keepassdroid.database.edit;
 
 import android.content.Context;
-
 import com.keepassdroid.Database;
 import com.keepassdroid.database.PwDatabase;
 import com.keepassdroid.database.PwGroup;

@@ -27,10 +27,7 @@ import android.net.Uri;
 
 import com.keepassdroid.Database;
 import com.keepassdroid.database.PwDatabaseV3Debug;
-import com.keepassdroid.database.load.Importer;
 import com.keepassdroid.tests.TestUtil;
-import com.keepassdroid.utils.EmptyUtils;
-import com.keepassdroid.utils.UriUtil;
 
 public class TestData {
 	private static final String TEST1_KEYFILE = "";
@@ -56,11 +53,10 @@ public class TestData {
 		AssetManager am = ctx.getAssets();
 		InputStream is = am.open(asset, AssetManager.ACCESS_STREAMING);
 
-		Database Db = new Database();
 
 		InputStream keyIs = TestUtil.getKeyFileInputStream(ctx, keyfile);
 
-		Db.LoadData(ctx, is, password, keyIs, Importer.DEBUG);
+		Database Db = new Database(ctx, is, password, keyIs);
 		Uri.Builder b = new Uri.Builder();
 
 		Db.mUri = b.scheme("file").path(filename).build();

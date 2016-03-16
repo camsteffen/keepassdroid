@@ -53,7 +53,7 @@
     <string name="database">Tietokanta</string>
     <string name="decrypting_db">Puretaan tietokannan salausta&#8230;</string>
     <string name="decrypting_entry">Puretaan salasanatietuetta</string>
-    <string name="default_checkbox">Käytä tätä oletustietokantana</string>
+    <string name="set_default_database">Käytä tätä oletustietokantana</string>
     <string name="digits">Numerot</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin comes with ABSOLUTELY NO WARRANTY; This is free software, and you are welcome to redistribute it under the conditions of the GPL version 2 or later.</string>
     <string name="ellipsis">\u2026</string>
@@ -74,7 +74,7 @@
     <string name="entry_url">URL-osoite: </string>
     <string name="entry_user_name">Käyttäjänimi: </string>
     <string name="error_arc4">The ArcFour stream cipher ei ole tuettu.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid ei osaa käsitellä tätä osoitetta.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid ei osaa käsitellä tätä osoitetta.</string>
     <string name="error_could_not_create_group">Virhe ryhmän luonnissa.</string>
     <string name="error_could_not_create_parent">Virhe aliryhmän luonnissa.</string>
     <string name="error_database_exists">Tiedosto on jo olemassa.</string>
@@ -96,7 +96,7 @@
     <string name="error_wrong_length">Syötä positiivinen kokonaisluku pituus-kenttään</string>
     <string name="field_name">Kentän nimi</string>
     <string name="field_value">Kentän arvo</string>
-    <string name="FileNotFound">Tiedostoa ei löydetty.</string>
+    <string name="file_not_found">Tiedostoa ei löydetty.</string>
     <string name="file_browser">Tiedostoselain</string>
     <string name="generate_password">Generoi salasana</string>
     <string name="group">Ryhmä</string>
@@ -116,7 +116,7 @@
     <string name="InvalidPassword">Väärä salasana tai avaintiedosto.</string>
     <string name="invalid_algorithm">Epäkelpo algoritmi.</string>
     <string name="invalid_db_sig">Salasanatietokannan tyyppiä ei tunnistettu.</string>
-    <string name="keyfile_does_not_exist">Avaintiedostoa ei ole olemassa.</string>
+    <string name="key_file_not_found">Avaintiedostoa ei ole olemassa.</string>
     <string name="keyfile_is_empty">Avaintiedosto on tyhjä.</string>
     <string name="length">Pituus</string>
     <string name="list_size_title">Ryhmälistan pituus</string>
@@ -126,12 +126,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Piilota salasaan</string>
     <string name="maskpass_summary">Piilota salasanat oletuksena</string>
-    <string name="menu_about">Tietoa</string>
+    <string name="about">Tietoa</string>
     <string name="menu_change_key">Vaihda pääsalasanaa</string>
     <string name="menu_copy_pass">Kopioi salasana</string>
     <string name="menu_copy_user">Kopioi käyttäjänimi</string>
     <string name="menu_create">Luo</string>
-    <string name="menu_app_settings">Asetukset</string>
+    <string name="settings">Asetukset</string>
     <string name="menu_db_settings">Salasanatietokannan asetukset</string>
     <string name="menu_delete">Poista</string>
     <string name="menu_donate">Lahjoita</string>
@@ -139,7 +139,7 @@
     <string name="menu_hide_password">Piilota salasana</string>
     <string name="menu_homepage">Mene kotisivulle</string>
     <string name="menu_lock">Lukitse salasanatietokanta</string>
-    <string name="menu_open">Avaa</string>
+    <string name="open">Avaa</string>
     <string name="menu_rename">Nimeä uudelleen</string>
     <string name="menu_search">Etsi</string>
     <string name="menu_showpass">Näytä salasana</string>

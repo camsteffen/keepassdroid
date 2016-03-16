@@ -19,15 +19,14 @@
  */
 package com.keepassdroid.crypto;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
+import com.keepassdroid.database.CrsAlgorithm;
 import org.bouncycastle.crypto.StreamCipher;
 import org.bouncycastle.crypto.engines.Salsa20Engine;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 
-import com.keepassdroid.database.CrsAlgorithm;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class PwStreamCipherFactory {
 	public static StreamCipher getInstance(CrsAlgorithm alg, byte[] key) {

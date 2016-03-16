@@ -56,7 +56,7 @@
     <string name="database">Base de données</string>
     <string name="decrypting_db">Déchiffrement du contenu de la base de données&#8230;</string>
     <string name="decrypting_entry">Déchiffrement de l\'entrée</string>
-    <string name="default_checkbox">Utiliser comme base de données par défaut</string>
+    <string name="set_default_database">Utiliser comme base de données par défaut</string>
     <string name="digits">Nombres</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin n\'offre ABSOLUMENT AUCUNE GARANTIE; il s\'agit d\'un logiciel libre, vous pouvez le redistribuer sous les conditions de la licence GPL v2 ou ultérieure.</string>
 
@@ -77,7 +77,7 @@
     <string name="entry_url">URL</string>
     <string name="entry_user_name">Nom d\'utilisateur</string>
     <string name="error_arc4">Le chiffrement de flux ArcFour n\'est pas supporté.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid ne peut pas gérer cette URI.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid ne peut pas gérer cette URI.</string>
     <string name="error_could_not_create_group">La création de groupe a échoué.</string>
     <string name="error_could_not_create_parent">La création du groupe parent a échoué.</string>
     <string name="error_database_exists">Le fichier existe déjà.</string>
@@ -99,7 +99,7 @@
     <string name="error_wrong_length">Entrez un entier positif pour la longueur du champ</string>
     <string name="field_name">Nom du champ</string>
     <string name="field_value">Valeur</string>
-    <string name="FileNotFound">Fichier non trouvé.</string>
+    <string name="file_not_found">Fichier non trouvé.</string>
     <string name="file_browser">Navigateur de fichiers</string>
     <string name="generate_password">Générer mot de passe</string>
     <string name="group">Groupe</string>
@@ -119,7 +119,7 @@
     <string name="InvalidPassword">Mot de passe ou fichier de clé invalide.</string>
     <string name="invalid_algorithm">Algorithme invalide.</string>
     <string name="invalid_db_sig">Format de base de données non reconnu.</string>
-    <string name="keyfile_does_not_exist">Le fichier de clé n\'existe pas.</string>
+    <string name="key_file_not_found">Le fichier de clé n\'existe pas.</string>
     <string name="keyfile_is_empty">Le fichier de clé est vide.</string>
     <string name="length">Longueur</string>
     <string name="list_size_title">Taille de la liste des groupes</string>
@@ -129,12 +129,12 @@
 
     <string name="maskpass_title">Afficher le mot de passe</string>
     <string name="maskpass_summary">Par défaut, masquer le mot de passe</string>
-    <string name="menu_about">À propos</string>
+    <string name="about">À propos</string>
     <string name="menu_change_key">Modifier la clé maître</string>
     <string name="menu_copy_pass">Copier le mot de passe</string>
     <string name="menu_copy_user">Copier le nom d\'utilisateur</string>
     <string name="menu_create">Créer</string>
-    <string name="menu_app_settings">Préférences de l\'application</string>
+    <string name="settings">Préférences de l\'application</string>
     <string name="menu_db_settings">Préférences de la base de données</string>
     <string name="menu_delete">Supprimer</string>
     <string name="menu_donate">Faire un don</string>
@@ -142,7 +142,7 @@
     <string name="menu_hide_password">Masquer le mot de passe</string>
     <string name="menu_homepage">Aller à la page d\'accueil</string>
     <string name="menu_lock">Verrouiller la base de données</string>
-    <string name="menu_open">Ouvrir</string>
+    <string name="open">Ouvrir</string>
     <string name="menu_rename">Renommer</string>
     <string name="menu_search">Rechercher</string>
     <string name="menu_showpass">Afficher le mot de passe</string>

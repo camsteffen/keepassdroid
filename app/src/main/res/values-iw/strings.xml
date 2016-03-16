@@ -53,7 +53,7 @@
   <string name="database">מסד נתונים</string>
   <string name="decrypting_db">מפענח תוכן מסד נתונים&#8230;</string>
   <string name="decrypting_entry">מפענח חוליה</string>
-  <string name="default_checkbox">השתמש בזה כמסד הנתונים הברירת מחדל</string>
+  <string name="set_default_database">השתמש בזה כמסד הנתונים הברירת מחדל</string>
   <string name="digits">ספרות</string>
   <string name="enter_filename">הזן שם קובץ למסד נתונים:</string>
   <string name="entry_accessed">ניגש לאחרונה: </string>
@@ -71,7 +71,7 @@
   <string name="entry_title">שם: </string>
   <string name="entry_user_name">שם משתמש: </string>
   <string name="error_arc4">צופן זרם ArcFour אינו נתמך.</string>
-  <string name="error_can_not_handle_uri">KeePassDroid לא יכול לטפל ב-URI הזה.</string>
+  <string name="error_cannot_handle_uri">KeePassDroid לא יכול לטפל ב-URI הזה.</string>
   <string name="error_could_not_create_group">שגיאה ביצירת קבוצה.</string>
   <string name="error_could_not_create_parent">לא הצליח לפתוח את תקיית האב.</string>
   <string name="error_database_exists">קובץ זה קיים כבר.</string>
@@ -93,7 +93,7 @@
   <string name="error_wrong_length">הזן מספר חיובי בשדה האורך</string>
   <string name="field_name">שם השדה</string>
   <string name="field_value">ערך השדה</string>
-  <string name="FileNotFound">קובץ לא נמצא.</string>
+  <string name="file_not_found">קובץ לא נמצא.</string>
   <string name="file_browser">סייר קבצים</string>
   <string name="generate_password">צור סיסמה</string>
   <string name="group">קבוצה</string>
@@ -112,7 +112,7 @@
   <string name="InvalidPassword">סיסמה או קובץ מפתח לא מתאימים.</string>
   <string name="invalid_algorithm">אלגוריתם לא חוקי.</string>
   <string name="invalid_db_sig">תבנית מסד הנתונים אינה מזוהה.</string>
-  <string name="keyfile_does_not_exist">קובץ המפתח לא קיים.</string>
+  <string name="key_file_not_found">קובץ המפתח לא קיים.</string>
   <string name="keyfile_is_empty">קובץ מפתח ריק.</string>
   <string name="length">אורך</string>
   <string name="list_size_title">גודל רשימה קבוצות</string>
@@ -121,12 +121,12 @@
   <string name="lowercase">אות קטנה</string>
   <string name="maskpass_title">מסיכת הסיסמה</string>
   <string name="maskpass_summary">הסתר סיסמאות כברירת מחדל</string>
-  <string name="menu_about">אודות</string>
+  <string name="about">אודות</string>
   <string name="menu_change_key">שנה מפתח ראשי</string>
   <string name="menu_copy_pass">העתק סיסמה</string>
   <string name="menu_copy_user">העתק שם משתמש</string>
   <string name="menu_create">צור</string>
-  <string name="menu_app_settings">העדפות</string>
+  <string name="settings">העדפות</string>
   <string name="menu_db_settings">הגדרות מסד נתונים</string>
   <string name="menu_delete">מחק</string>
   <string name="menu_donate">תרום</string>
@@ -134,7 +134,7 @@
   <string name="menu_hide_password">הסתר סיסמה</string>
   <string name="menu_homepage">עבור לדף הבית</string>
   <string name="menu_lock">נעל מסד נתונים</string>
-  <string name="menu_open">פתח</string>
+  <string name="open">פתח</string>
   <string name="menu_rename">שנה שם</string>
   <string name="menu_search">חפש</string>
   <string name="menu_showpass">הצג סיסמה</string>

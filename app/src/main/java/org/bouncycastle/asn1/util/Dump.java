@@ -1,8 +1,8 @@
 package org.bouncycastle.asn1.util;
 
-import java.io.FileInputStream;
-
 import org.bouncycastle.asn1.ASN1InputStream;
+
+import java.io.FileInputStream;
 
 public class Dump
 {

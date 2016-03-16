@@ -19,71 +19,40 @@
  */
 package com.keepassdroid.app;
 
-import java.util.Calendar;
-
 import android.app.Application;
-
-import com.keepassdroid.Database;
 import com.keepassdroid.compat.PRNGFixes;
 import com.keepassdroid.fileselect.RecentFileHistory;
 
+import java.util.Calendar;
+
 public class App extends Application {
-	private static Database db = null;
-	private static boolean shutdown = false;
-	private static Calendar calendar = null;
-	private static RecentFileHistory fileHistory = null;
-	
-	public static Database getDB() {
-		if ( db == null ) {
-			db = new Database();
-		}
-		
-		return db;
-	}
-	
-	public static RecentFileHistory getFileHistory() {
-		return fileHistory;
-	}
-	
-	public static void setDB(Database d) {
-		db = d;
-	}
-	
-	public static boolean isShutdown() {
-		return shutdown;
-	}
-	
-	public static void setShutdown() {
-		shutdown = true;
-	}
-	
-	public static void clearShutdown() {
-		shutdown = false;
-	}
-	
-	public static Calendar getCalendar() {
-		if ( calendar == null ) {
-			calendar = Calendar.getInstance();
-		}
-		
-		return calendar;
-	}
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		
-		fileHistory = new RecentFileHistory(this);
-		
-		PRNGFixes.apply();
-	}
+    public static final int EXIT_NORMAL = 0;
+    public static final int EXIT_LOCK = 1;
+    public static final int EXIT_REFRESH = 2;
+    public static final int EXIT_REFRESH_TITLE = 3;
 
-	@Override
-	public void onTerminate() {
-		if ( db != null ) {
-			db.clear();
-		}
-		
-		super.onTerminate();
-	}
+    private static Calendar calendar = null;
+    private static RecentFileHistory fileHistory;
+
+    public static RecentFileHistory getFileHistory() {
+        return fileHistory;
+    }
+
+    public static Calendar getCalendar() {
+        if (calendar == null) {
+            calendar = Calendar.getInstance();
+        }
+
+        return calendar;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        fileHistory = new RecentFileHistory(this);
+
+        PRNGFixes.apply();
+    }
 }

@@ -20,7 +20,6 @@
 package com.keepassdroid.dialog;
 
 import android.content.Context;
-
 import com.android.keepass.R;
 import com.keepassdroid.compat.BuildCompat;
 

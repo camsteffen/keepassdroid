@@ -1,8 +1,8 @@
 package org.bouncycastle.crypto.paddings;
 
-import java.security.SecureRandom;
-
 import org.bouncycastle.crypto.InvalidCipherTextException;
+
+import java.security.SecureRandom;
 
 /**
  * A padder that adds NULL byte padding to a block.

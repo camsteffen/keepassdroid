@@ -24,9 +24,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.android.keepass.R;
-import com.keepassdroid.app.App;
 
 public class GroupHeaderView extends RelativeLayout {
 
@@ -44,10 +42,10 @@ public class GroupHeaderView extends RelativeLayout {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.group_header, this);
 		
-		if (App.getDB().readOnly) {
+		// if (db.readOnly) { TODO
 			View readOnlyIndicator = findViewById(R.id.read_only);
 			readOnlyIndicator.setVisibility(VISIBLE);
-		}
+		//}
 		
 	}
 

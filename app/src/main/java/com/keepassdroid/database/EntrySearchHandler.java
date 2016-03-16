@@ -19,10 +19,10 @@
  */
 package com.keepassdroid.database;
 
+import com.keepassdroid.database.iterator.EntrySearchStringIterator;
+
 import java.util.Date;
 import java.util.List;
-
-import com.keepassdroid.database.iterator.EntrySearchStringIterator;
 
 public abstract class EntrySearchHandler extends EntryHandler<PwEntry> {
 	private List<PwEntry> listStorage;

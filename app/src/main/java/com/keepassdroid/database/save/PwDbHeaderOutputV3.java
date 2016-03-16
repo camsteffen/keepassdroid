@@ -19,12 +19,11 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
-
 import com.keepassdroid.database.PwDbHeaderV3;
 import com.keepassdroid.stream.LEDataOutputStream;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class PwDbHeaderOutputV3 {
 	private PwDbHeaderV3 mHeader;

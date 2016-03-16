@@ -51,7 +51,7 @@
     <string name="database">Banco de Dados</string>
     <string name="decrypting_db">Decifrando conteúdo do banco de dados&#8230;</string>
     <string name="decrypting_entry">Decifrando entrada</string>
-    <string name="default_checkbox">Usar este banco de dados como padrão</string>
+    <string name="set_default_database">Usar este banco de dados como padrão</string>
     <string name="digits">Digitos</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin vem com ABSOLUTAMENTE NENHUMA GARANTIA; Este é um software livre, e você está convidado a redistribui-lo sob as condições da GPL versão 2 ou posterior.</string>
     <string name="ellipsis">\u2026</string>
@@ -71,7 +71,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Nome de usuário: </string>
     <string name="error_arc4">A cifra de fluxo ArcFour não é suportada.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid não pôde tratar esta uri.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid não pôde tratar esta uri.</string>
     <string name="error_could_not_create_group">Erro ao criar grupo.</string>
     <string name="error_could_not_create_parent">Não foi possível criar o diretório pai.</string>
     <string name="error_database_exists">Este arquivo já existe.</string>
@@ -90,7 +90,7 @@
     <string name="error_rounds_too_large">Número de rodadas é muito grande. Modificado para 2147483648.</string>
     <string name="error_title_required">É necessário um título.</string>
     <string name="error_wrong_length">Digite um número inteiro positivo no campo de tamanho</string>
-    <string name="FileNotFound">Arquivo não encontrado.</string>
+    <string name="file_not_found">Arquivo não encontrado.</string>
     <string name="file_browser">Localizador de Arquivos</string>
     <string name="generate_password">Gerar Senha</string>
     <string name="group">Grupo</string>
@@ -117,12 +117,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Esconder senha</string>
     <string name="maskpass_summary">Esconder senha por padrão</string>
-    <string name="menu_about">Sobre</string>
+    <string name="about">Sobre</string>
     <string name="menu_change_key">Modificar Senha Mestre</string>
     <string name="menu_copy_pass">Copiar Senha</string>
     <string name="menu_copy_user">Copiar Usuário</string>
     <string name="menu_create">Criar</string>
-    <string name="menu_app_settings">Configurações</string>
+    <string name="settings">Configurações</string>
     <string name="menu_db_settings">Configurações do banco de dados</string>
     <string name="menu_delete">Deletar</string>
     <string name="menu_donate">Doaçoes</string>
@@ -130,7 +130,7 @@
     <string name="menu_hide_password">Esconder Senha</string>
     <string name="menu_homepage">Ir para a página inicial</string>
     <string name="menu_lock">Trancar banco de dados</string>
-    <string name="menu_open">Abrir</string>
+    <string name="open">Abrir</string>
     <string name="menu_rename">Renomear</string>
     <string name="menu_search">Procurar</string>
     <string name="menu_showpass">Mostrar senha</string>

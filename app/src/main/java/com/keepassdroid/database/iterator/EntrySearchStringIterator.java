@@ -19,13 +19,9 @@
  */
 package com.keepassdroid.database.iterator;
 
-import java.util.Iterator;
+import com.keepassdroid.database.*;
 
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwEntryV3;
-import com.keepassdroid.database.PwEntryV4;
-import com.keepassdroid.database.SearchParameters;
-import com.keepassdroid.database.SearchParametersV4;
+import java.util.Iterator;
 
 public abstract class EntrySearchStringIterator implements Iterator<String> {
 	

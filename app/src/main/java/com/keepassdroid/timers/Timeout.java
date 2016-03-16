@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.android.keepass.R;
 import com.keepassdroid.intents.Intents;
 import com.keepassdroid.services.TimeoutService;
@@ -25,7 +24,6 @@ public class Timeout {
 	}
 	
 	public static void start(Context ctx) {
-
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 		String sTimeout = prefs.getString(ctx.getString(R.string.app_timeout_key), ctx.getString(R.string.clipboard_timeout_default));

@@ -19,11 +19,10 @@
  */
 package com.keepassdroid.assets;
 
-import org.apache.commons.collections.map.AbstractReferenceMap;
-import org.apache.commons.collections.map.ReferenceMap;
-
 import android.content.Context;
 import android.graphics.Typeface;
+import org.apache.commons.collections.map.AbstractReferenceMap;
+import org.apache.commons.collections.map.ReferenceMap;
 
 /** Class to cache and return Typeface assets to workaround a bug in some versions of 
  * Android.

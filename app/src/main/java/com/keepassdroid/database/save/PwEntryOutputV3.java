@@ -19,12 +19,12 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.keepassdroid.database.PwEntryV3;
 import com.keepassdroid.stream.LEDataOutputStream;
 import com.keepassdroid.utils.Types;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class PwEntryOutputV3 {
 	// Constants

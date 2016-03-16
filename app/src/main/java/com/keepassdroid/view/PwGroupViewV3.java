@@ -19,51 +19,54 @@
  */
 package com.keepassdroid.view;
 
-import android.os.Handler;
+import android.content.Context;
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.ContextMenu.ContextMenuInfo;
-
+import android.view.MenuItem;
 import com.android.keepass.R;
-import com.keepassdroid.GroupBaseActivity;
+import com.keepassdroid.Database;
+import com.keepassdroid.GroupFragment;
 import com.keepassdroid.ProgressTask;
-import com.keepassdroid.app.App;
 import com.keepassdroid.database.PwGroup;
 import com.keepassdroid.database.edit.DeleteGroup;
 
-public class PwGroupViewV3 extends PwGroupView {
+class PwGroupViewV3 extends PwGroupView {
 
-	private static final int MENU_DELETE = MENU_OPEN + 1;
+    private static final int MENU_DELETE = MENU_OPEN + 1;
+    private final GroupFragment fragment;
 
-	protected PwGroupViewV3(GroupBaseActivity act, PwGroup pw) {
-		super(act, pw);
-	}
+    private Database db; // TODO
 
-	@Override
-	public void onCreateMenu(ContextMenu menu, ContextMenuInfo menuInfo) {
-		super.onCreateMenu(menu, menuInfo);
-		
-		if (!readOnly) {
+    PwGroupViewV3(Context context, PwGroup pw, GroupFragment fragment) {
+        super(context, pw);
+        this.fragment = fragment;
+    }
+
+    @Override
+    public void onCreateMenu(ContextMenu menu, ContextMenuInfo menuInfo) {
+        super.onCreateMenu(menu, menuInfo);
+
+		/* TODO
+        if (!readOnly) {
 		    menu.add(0, MENU_DELETE, 0, R.string.menu_delete);
 		}
+		*/
 
-	}
+    }
 
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		if ( ! super.onContextItemSelected(item) ) {
-			switch ( item.getItemId() ) {
-			case MENU_DELETE:
-				Handler handler = new Handler();
-				DeleteGroup task = new DeleteGroup(App.getDB(), mPw, mAct, mAct.new AfterDeleteGroup(handler));
-				ProgressTask pt = new ProgressTask(mAct, task, R.string.saving_database);
-				pt.run();
-				return true;
-			}
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (!super.onContextItemSelected(item)) {
+            switch (item.getItemId()) {
+                case MENU_DELETE:
+                    DeleteGroup task = new DeleteGroup(db, mPw, fragment, fragment.new AfterDeleteGroup());
+                    ProgressTask pt = new ProgressTask(getContext(), task, R.string.saving_database);
+                    pt.run();
+                    return true;
+            }
 
-		}
-		
-		return false;
-	}
+        }
 
+        return false;
+    }
 }

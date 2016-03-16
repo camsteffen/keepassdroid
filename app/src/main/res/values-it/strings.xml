@@ -51,7 +51,7 @@
     <string name="database">Database</string>
     <string name="decrypting_db">Decodifica contenuto database&#8230;</string>
     <string name="decrypting_entry">Decodifica valore</string>
-    <string name="default_checkbox">Usa come database predefinito</string>
+    <string name="set_default_database">Usa come database predefinito</string>
     <string name="digits">Cifre</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 di Brian Pellin viene distribuito ASSOLUTAMENTE con NESSUNA GARANZIA; Si tratta di software libero, e sei invitato a distribuirlo sotto le condizioni della licenza GPL versione 2 o superiore.</string>
     <string name="ellipsis">\u2026</string>
@@ -71,7 +71,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Nome utente: </string>
     <string name="error_arc4">La codifica ArcFour non è supportata.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid non può gestire questo URL.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid non può gestire questo URL.</string>
     <string name="error_could_not_create_group">Errore creazione gruppo.</string>
     <string name="error_could_not_create_parent">Impossibile creare la directory principale.</string>
     <string name="error_database_exists">File già esistente.</string>
@@ -90,7 +90,7 @@
     <string name="error_rounds_too_large">Livello troppo grande.  Impostato a 2147483648.</string>
     <string name="error_title_required">E\' necessario un titolo.</string>
     <string name="error_wrong_length">Inserisci un valore positivo nella lunghezza campo</string>
-    <string name="FileNotFound">File non trovato.</string>
+    <string name="file_not_found">File non trovato.</string>
     <string name="file_browser">Sfoglia file</string>
     <string name="generate_password">Genera password</string>
     <string name="group">Gruppo</string>
@@ -117,12 +117,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Maschera password</string>
     <string name="maskpass_summary">Nascondi le password in modo predefinito</string>
-    <string name="menu_about">Info</string>
+    <string name="about">Info</string>
     <string name="menu_change_key">Modifica chiave Principale</string>
     <string name="menu_copy_pass">Copia Password</string>
     <string name="menu_copy_user">Copia Utente</string>
     <string name="menu_create">Crea</string>
-    <string name="menu_app_settings">Impostazioni</string>
+    <string name="settings">Impostazioni</string>
     <string name="menu_db_settings">Impostazioni Database</string>
     <string name="menu_delete">Elimina</string>
     <string name="menu_donate">Dona</string>
@@ -130,7 +130,7 @@
     <string name="menu_hide_password">Nascondi Password</string>
     <string name="menu_homepage">Vai alla pagina web</string>
     <string name="menu_lock">Blocca Database</string>
-    <string name="menu_open">Apri</string>
+    <string name="open">Apri</string>
     <string name="menu_rename">Rinomina</string>
     <string name="menu_search">Cerca</string>
     <string name="menu_showpass">Mostra Password</string>

@@ -48,6 +48,4 @@ public abstract class RunnableOnFinish implements Runnable {
 	public void setStatus(UpdateStatus status) {
 		mStatus = status;
 	}
-	
-	abstract public void run();
 }

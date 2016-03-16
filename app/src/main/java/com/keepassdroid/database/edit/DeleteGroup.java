@@ -19,28 +19,27 @@
  */
 package com.keepassdroid.database.edit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.keepassdroid.Database;
-import com.keepassdroid.GroupBaseActivity;
-import com.keepassdroid.app.App;
+import com.keepassdroid.GroupFragment;
 import com.keepassdroid.database.PwEntry;
 import com.keepassdroid.database.PwGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteGroup extends RunnableOnFinish {
 	
 	private Database mDb;
 	private PwGroup mGroup;
-	private GroupBaseActivity mAct;
+	private GroupFragment mAct;
 	private boolean mDontSave;
-	
-	public DeleteGroup(Database db, PwGroup group, GroupBaseActivity act, OnFinish finish) {
+
+	public DeleteGroup(Database db, PwGroup group, GroupFragment act, OnFinish finish) {
 		super(finish);
 		setMembers(db, group, act, false);
 	}
-	
-	public DeleteGroup(Database db, PwGroup group, GroupBaseActivity act, OnFinish finish, boolean dontSave) {
+
+	private DeleteGroup(Database db, PwGroup group, GroupFragment act, OnFinish finish, boolean dontSave) {
 		super(finish);
 		setMembers(db, group, act, dontSave);
 	}
@@ -51,7 +50,7 @@ public class DeleteGroup extends RunnableOnFinish {
 		setMembers(db, group, null, dontSave);
 	}
 
-	private void setMembers(Database db, PwGroup group, GroupBaseActivity act, boolean dontSave) {
+	private void setMembers(Database db, PwGroup group, GroupFragment act, boolean dontSave) {
 		mDb = db;
 		mGroup = group;
 		mAct = act;
@@ -66,16 +65,16 @@ public class DeleteGroup extends RunnableOnFinish {
 	public void run() {
 		
 		// Remove child entries
-		List<PwEntry> childEnt = new ArrayList<PwEntry>(mGroup.childEntries);
-		for ( int i = 0; i < childEnt.size(); i++ ) {
-			DeleteEntry task = new DeleteEntry(mAct, mDb, childEnt.get(i), null, true);
+		List<PwEntry> childEnt = new ArrayList<>(mGroup.childEntries);
+		for (PwEntry aChildEnt : childEnt) {
+			DeleteEntry task = new DeleteEntry(mAct.getContext(), mDb, aChildEnt, null, true);
 			task.run();
 		}
 		
 		// Remove child groups
-		List<PwGroup> childGrp = new ArrayList<PwGroup>(mGroup.childGroups);
-		for ( int i = 0; i < childGrp.size(); i++ ) {
-			DeleteGroup task = new DeleteGroup(mDb, childGrp.get(i), mAct, null, true);
+		List<PwGroup> childGrp = new ArrayList<>(mGroup.childGroups);
+		for (PwGroup aChildGrp : childGrp) {
+			DeleteGroup task = new DeleteGroup(mDb, aChildGrp, mAct, null, true);
 			task.run();
 		}
 		
@@ -90,13 +89,13 @@ public class DeleteGroup extends RunnableOnFinish {
 		mDb.pm.getGroups().remove(mGroup);
 		
 		// Save
-		SaveDB save = new SaveDB(mAct, mDb, mFinish, mDontSave);
+		SaveDB save = new SaveDB(mAct.getContext(), mDb, mFinish, mDontSave);
 		save.run();
 
 	}
 	
 	private class AfterDelete extends OnFinish {
-		public AfterDelete(OnFinish finish) {
+		AfterDelete(OnFinish finish) {
 			super(finish);
 		}
 
@@ -116,7 +115,8 @@ public class DeleteGroup extends RunnableOnFinish {
 				mDb.dirty.add(mDb.pm.rootGroup);
 			} else {
 				// Let's not bother recovering from a failure to save a deleted group.  It is too much work.
-				App.setShutdown();
+				//TODO
+				// App.setShutdown();
 			}
 			
 			super.run();

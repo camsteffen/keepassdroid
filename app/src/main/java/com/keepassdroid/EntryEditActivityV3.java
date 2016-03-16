@@ -20,8 +20,6 @@
 package com.keepassdroid;
 
 import android.content.Intent;
-
-import com.keepassdroid.app.App;
 import com.keepassdroid.database.PwEntry;
 import com.keepassdroid.database.PwGroupId;
 import com.keepassdroid.database.PwGroupIdV3;
@@ -29,21 +27,22 @@ import com.keepassdroid.database.PwGroupV3;
 
 public class EntryEditActivityV3 extends EntryEditActivity {
 
+	Database db; // TODO
+
 	@Override
 	protected PwEntry populateNewEntry(PwEntry entry) {
 		PwEntry newEntry = super.populateNewEntry(entry);
 		
 		if (mSelectedIconID == -1) {
 			if (mIsNew) {
-				newEntry.icon = App.getDB().pm.iconFactory.getIcon(0);
-			}
-			else {
+				newEntry.icon = db.pm.iconFactory.getIcon(0);
+			} else {
 				// Keep previous icon, if no new one was selected
 				newEntry.icon = mEntry.icon;
 			}
 		}
 		else {
-			newEntry.icon = App.getDB().pm.iconFactory.getIcon(mSelectedIconID);
+			newEntry.icon = db.pm.iconFactory.getIcon(mSelectedIconID);
 		}
 		
 		return newEntry;

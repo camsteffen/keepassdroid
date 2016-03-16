@@ -19,17 +19,13 @@
  */
 package com.keepassdroid.database;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
-
+import com.keepassdroid.Database;
 import com.keepassdroid.database.security.ProtectedBinary;
 import com.keepassdroid.database.security.ProtectedString;
 import com.keepassdroid.utils.SprEngine;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class PwEntryV4 extends PwEntry implements ITimeLogger {
 	public static final String STR_TITLE = "Title";
@@ -40,14 +36,14 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 	
 	public PwGroupV4 parent;
 	public UUID uuid = PwDatabaseV4.UUID_ZERO;
-	public HashMap<String, ProtectedString> strings = new HashMap<String, ProtectedString>();
-	public HashMap<String, ProtectedBinary> binaries = new HashMap<String, ProtectedBinary>();
-	public PwIconCustom customIcon = PwIconCustom.ZERO;
+	public HashMap<String, ProtectedString> strings = new HashMap<>();
+	public HashMap<String, ProtectedBinary> binaries = new HashMap<>();
+	public UUID customIcon = PwDatabaseV4.UUID_ZERO;
 	public String foregroundColor = "";
 	public String backgroupColor = "";
 	public String overrideURL = "";
 	public AutoType autoType = new AutoType();
-	public ArrayList<PwEntryV4> history = new ArrayList<PwEntryV4>();
+	public ArrayList<PwEntryV4> history = new ArrayList<>();
 	
 	private Date parentGroupLastMod = PwDatabaseV4.DEFAULT_NOW;
 	private Date creation = PwDatabaseV4.DEFAULT_NOW;
@@ -67,7 +63,7 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 		public long obfuscationOptions = OBF_OPT_NONE;
 		public String defaultSequence = "";
 		
-		private HashMap<String, String> windowSeqPairs = new HashMap<String, String>();
+		private HashMap<String, String> windowSeqPairs = new HashMap<>();
 		
 		@SuppressWarnings("unchecked")
 		public Object clone() {
@@ -76,7 +72,6 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 				auto = (AutoType) super.clone();
 			} 
 			catch (CloneNotSupportedException e) {
-				assert(false);
 				throw new RuntimeException(e);
 			}
 			
@@ -132,9 +127,9 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 		
 		return entry;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public PwEntryV4 cloneDeep() {
+	private PwEntryV4 cloneDeep() {
 		PwEntryV4 entry = (PwEntryV4) clone(true);
 		
 		entry.binaries = (HashMap<String, ProtectedBinary>) binaries.clone();
@@ -178,13 +173,6 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 		url = source.url;
 		additional = source.additional;
 		
-	}
-	
-	@Override
-	public Object clone() {
-		PwEntryV4 newEntry = (PwEntryV4) super.clone();
-		
-		return newEntry;
 	}
 	
 	private String decodeRefKey(boolean decodeRef, String key, PwDatabase db) {
@@ -313,12 +301,12 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 	public String getString(String key) {
 		ProtectedString value = strings.get(key);
 		
-		if ( value == null ) return new String("");
+		if ( value == null ) return "";
 		
 		return value.toString();
 	}
 
-	public void setString(String key, String value, boolean protect) {
+	private void setString(String key, String value, boolean protect) {
 		ProtectedString ps = new ProtectedString(protect, value);
 		strings.put(key, ps);
 	}
@@ -359,13 +347,12 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 	}
 
 	@Override
-	public PwIcon getIcon() {
-		if (customIcon == null || customIcon.uuid.equals(PwDatabaseV4.UUID_ZERO)) {
-			return super.getIcon();
+	public PwIcon getIcon(Database db) {
+		if (customIcon == null || customIcon.equals(PwDatabaseV4.UUID_ZERO)) {
+			return super.getIcon(db);
 		} else {
-			return customIcon;
+			return ((PwDatabaseV4) db.pm).customIcons.get(customIcon); // TODO
 		}
-		
 	}
 
 	public static boolean IsStandardString(String key) {
@@ -376,7 +363,7 @@ public class PwEntryV4 extends PwEntry implements ITimeLogger {
 	
 	public void createBackup(PwDatabaseV4 db) {
 		PwEntryV4 copy = cloneDeep();
-		copy.history = new ArrayList<PwEntryV4>();
+		copy.history = new ArrayList<>();
 		history.add(copy);
 		
 		if (db != null) maintainBackups(db);

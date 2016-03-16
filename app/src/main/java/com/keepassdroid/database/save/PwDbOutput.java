@@ -19,15 +19,15 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.OutputStream;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
 import com.keepassdroid.database.PwDatabase;
 import com.keepassdroid.database.PwDatabaseV3;
 import com.keepassdroid.database.PwDatabaseV4;
 import com.keepassdroid.database.PwDbHeader;
 import com.keepassdroid.database.exception.PwDbOutputException;
+
+import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public abstract class PwDbOutput {
 	

@@ -19,11 +19,11 @@
  */
 package com.keepassdroid.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.keepassdroid.database.PwDatabaseV4;
 import com.keepassdroid.database.PwEntryV4;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SprContextV4 implements Cloneable {
 	public PwDatabaseV4 db;

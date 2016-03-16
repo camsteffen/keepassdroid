@@ -20,18 +20,15 @@
 package com.keepassdroid.view;
 
 
+import android.content.Context;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.keepass.R;
-import com.keepassdroid.GroupActivity;
-import com.keepassdroid.GroupBaseActivity;
-import com.keepassdroid.app.App;
+import com.keepassdroid.GroupFragment;
 import com.keepassdroid.database.PwGroup;
 import com.keepassdroid.database.PwGroupV3;
 import com.keepassdroid.settings.PrefsUtil;
@@ -40,50 +37,38 @@ import com.keepassdroid.settings.PrefsUtil;
 public class PwGroupView extends ClickView {
 	
 	protected PwGroup mPw;
-	protected GroupBaseActivity mAct;
 	protected TextView mTv;
 
 	protected static final int MENU_OPEN = Menu.FIRST;
 	
-	public static PwGroupView getInstance(GroupBaseActivity act, PwGroup pw) {
+	public static PwGroupView getInstance(GroupFragment fragment, PwGroup pw) {
 		if ( pw instanceof PwGroupV3 ) {
-			return new PwGroupViewV3(act, pw);
+			return new PwGroupViewV3(fragment.getContext(), pw, fragment);
 		} else {
-			return new PwGroupView(act, pw);
+			return new PwGroupView(fragment.getContext(), pw);
 		}
 	}
 	
-	protected PwGroupView(GroupBaseActivity act, PwGroup pw) {
-		super(act);
-		mAct = act;
+	PwGroupView(Context context, PwGroup pw) {
+		super(context);
 		
-		View gv = View.inflate(act, R.layout.group_list_entry, null);
+		View gv = View.inflate(context, R.layout.group_list_entry, null);
 		
-		mTv = (TextView) gv.findViewById(R.id.group_text);
-		float size = PrefsUtil.getListTextSize(act); 
+		mTv = (TextView) gv.findViewById(R.id.group_name);
+		float size = PrefsUtil.getListTextSize(context);
 		mTv.setTextSize(size);
 		
-		TextView label = (TextView) gv.findViewById(R.id.group_label);
-		label.setTextSize(size-8);
-		
-		populateView(gv, pw);
+		populateView(pw);
 		
 		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		
 		addView(gv, lp);
 	}
 	
-	private void populateView(View gv, PwGroup pw) {
+	private void populateView(PwGroup pw) {
 		mPw = pw;
 		
-		ImageView iv = (ImageView) gv.findViewById(R.id.group_icon);
-		App.getDB().drawFactory.assignDrawableTo(iv, getResources(), pw.getIcon());
-		
 		mTv.setText(pw.getName());
-	}
-	
-	public void convertView(PwGroup pw) {
-		populateView(this, pw);
 	}
 
 	public void onClick() {
@@ -91,18 +76,19 @@ public class PwGroupView extends ClickView {
 	}
 	
 	private void launchGroup() {
-		GroupActivity.Launch(mAct, mPw);
+		//GroupFragment.Launch((Activity) getContext(), mPw, db);
+        throw new UnsupportedOperationException(); // TODO
 	}
 
 	@Override
 	public void onCreateMenu(ContextMenu menu, ContextMenuInfo menuInfo) {
-		menu.add(0, MENU_OPEN, 0, R.string.menu_open);
+		menu.add(0, MENU_OPEN, 0, R.string.open);
 	}
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch ( item.getItemId() ) {
-			
+
 		case MENU_OPEN:
 			launchGroup();
 			return true;

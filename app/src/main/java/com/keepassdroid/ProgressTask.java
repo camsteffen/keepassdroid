@@ -22,7 +22,6 @@ package com.keepassdroid;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
-
 import com.android.keepass.R;
 import com.keepassdroid.database.edit.OnFinish;
 import com.keepassdroid.database.edit.RunnableOnFinish;
@@ -35,43 +34,36 @@ import com.keepassdroid.database.edit.RunnableOnFinish;
  *
  */
 public class ProgressTask implements Runnable {
-	private Context mCtx;
-	private Handler mHandler;
 	private RunnableOnFinish mTask;
 	private ProgressDialog mPd;
 	
 	public ProgressTask(Context ctx, RunnableOnFinish task, int messageId) {
-		mCtx = ctx;
 		mTask = task;
-		mHandler = new Handler();
+		Handler mHandler = new Handler();
 		
 		// Show process dialog
-		mPd = new ProgressDialog(mCtx);
+		mPd = new ProgressDialog(ctx);
 		mPd.setCanceledOnTouchOutside(false);
 		mPd.setTitle(ctx.getText(R.string.progress_title));
 		mPd.setMessage(ctx.getText(messageId));
 
 		// Set code to run when this is finished
 		mTask.setStatus(new UpdateStatus(ctx, mHandler, mPd));
-		mTask.mFinish = new AfterTask(task.mFinish, mHandler);
-		
+		mTask.mFinish = new AfterTask(task.mFinish);
 	}
 	
 	public void run() {
 		// Show process dialog
 		mPd.show();
-		
-			
+
 		// Start Thread to Run task
-		Thread t = new Thread(mTask);
-		t.start();
-		
+		new Thread(mTask).start();
 	}
 	
 	private class AfterTask extends OnFinish {
 		
-		public AfterTask(OnFinish finish, Handler handler) {
-			super(finish, handler);
+		AfterTask(OnFinish finish) {
+			super(finish);
 		}
 
 		@Override
@@ -90,7 +82,6 @@ public class ProgressTask implements Runnable {
 		public void run() {
 			mPd.dismiss();
 		}
-		
 	}
-	
+
 }

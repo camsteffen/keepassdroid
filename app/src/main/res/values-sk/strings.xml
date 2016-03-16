@@ -48,7 +48,7 @@
     <string name="database">Databáza</string>
     <string name="decrypting_db">Dešifrujem obsah databázy&#8230;</string>
     <string name="decrypting_entry">Dešifrujem záznam</string>
-    <string name="default_checkbox">Použiť toto ako predvolenú databázu</string>
+    <string name="set_default_database">Použiť toto ako predvolenú databázu</string>
     <string name="digits">Číslice</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin použitie Absolútne bez Záruky; Toto je free software, a môžete ho používať pod GPL ver. 2 alebo vyššie.</string>
     <string name="ellipsis">\u2026</string>
@@ -68,7 +68,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Užívateľské meno: </string>
     <string name="error_arc4">ArcFour stream šifra nieje podporovaná.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid nevie použiť túto uri.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid nevie použiť túto uri.</string>
     <string name="error_could_not_create_group">Chyba vytvárania Skupiny.</string>
     <string name="error_could_not_create_parent">Neviem vytvoriť nadradený adresár.</string>
     <string name="error_database_exists">Tento súbor už existuje.</string>
@@ -87,7 +87,7 @@
     <string name="error_rounds_too_large">Príliš veľa opakovaní.  Nastavujem na 2147483648.</string>
     <string name="error_title_required">Vyžaduje sa názov.</string>
     <string name="error_wrong_length">Zadajte celé kladné číslo na dĺžku poľa</string>
-    <string name="FileNotFound">Súbor nenájdený.</string>
+    <string name="file_not_found">Súbor nenájdený.</string>
     <string name="file_browser">Správca Súborov</string>
     <string name="generate_password">Generovať Heslo</string>
     <string name="group">Skupina</string>
@@ -114,12 +114,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Skryť heslo</string>
     <string name="maskpass_summary">Skryť heslá štandardne</string>
-    <string name="menu_about">O Programe</string>
+    <string name="about">O Programe</string>
     <string name="menu_change_key">Zmeniť hlavný Kľúč</string>
     <string name="menu_copy_pass">Kopíruj Heslo</string>
     <string name="menu_copy_user">Kopíruj Užívateľa</string>
     <string name="menu_create">Vytvoriť</string>
-    <string name="menu_app_settings">Nastavenia</string>
+    <string name="settings">Nastavenia</string>
     <string name="menu_db_settings">Nastavenia Databázy</string>
     <string name="menu_delete">Zmazať</string>
     <string name="menu_donate">Darovať</string>
@@ -127,7 +127,7 @@
     <string name="menu_hide_password">Skryť Heslo</string>
     <string name="menu_homepage">Ísť na domovskú stránku</string>
     <string name="menu_lock">Zamknúť Databázu</string>
-    <string name="menu_open">Otvoriť</string>
+    <string name="open">Otvoriť</string>
     <string name="menu_rename">Premenovať</string>
     <string name="menu_search">Hľadať</string>
     <string name="menu_showpass">Zobraziť heslo</string>

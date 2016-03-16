@@ -19,49 +19,13 @@
  */
 package com.keepassdroid.database.save;
 
-import static com.keepassdroid.database.PwDatabaseV4XML.*;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.security.SecureRandom;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Stack;
-import java.util.UUID;
-import java.util.zip.GZIPOutputStream;
-
-import javax.crypto.Cipher;
-import javax.crypto.CipherOutputStream;
-
-import org.bouncycastle.crypto.StreamCipher;
-import org.xmlpull.v1.XmlSerializer;
-
 import android.util.Xml;
 import biz.source_code.base64Coder.Base64Coder;
-
 import com.keepassdroid.crypto.CipherFactory;
 import com.keepassdroid.crypto.PwStreamCipherFactory;
-import com.keepassdroid.database.BinaryPool;
-import com.keepassdroid.database.CrsAlgorithm;
-import com.keepassdroid.database.EntryHandler;
-import com.keepassdroid.database.GroupHandler;
-import com.keepassdroid.database.ITimeLogger;
-import com.keepassdroid.database.PwCompressionAlgorithm;
-import com.keepassdroid.database.PwDatabaseV4;
+import com.keepassdroid.database.*;
 import com.keepassdroid.database.PwDatabaseV4.MemoryProtectionConfig;
-import com.keepassdroid.database.PwDatabaseV4XML;
-import com.keepassdroid.database.PwDbHeader;
-import com.keepassdroid.database.PwDbHeaderV4;
-import com.keepassdroid.database.PwDefsV4;
-import com.keepassdroid.database.PwDeletedObject;
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwEntryV4;
 import com.keepassdroid.database.PwEntryV4.AutoType;
-import com.keepassdroid.database.PwGroup;
-import com.keepassdroid.database.PwGroupV4;
-import com.keepassdroid.database.PwIconCustom;
 import com.keepassdroid.database.exception.PwDbOutputException;
 import com.keepassdroid.database.security.ProtectedBinary;
 import com.keepassdroid.database.security.ProtectedString;
@@ -69,17 +33,29 @@ import com.keepassdroid.stream.HashedBlockOutputStream;
 import com.keepassdroid.utils.EmptyUtils;
 import com.keepassdroid.utils.MemUtil;
 import com.keepassdroid.utils.Types;
+import org.bouncycastle.crypto.StreamCipher;
+import org.xmlpull.v1.XmlSerializer;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.security.SecureRandom;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.zip.GZIPOutputStream;
+
+import static com.keepassdroid.database.PwDatabaseV4XML.*;
 
 public class PwDbV4Output extends PwDbOutput {
 
-	PwDatabaseV4 mPM;
+	private PwDatabaseV4 mPM;
 	private StreamCipher randomStream;
 	private BinaryPool binPool;
 	private XmlSerializer xml;
-	private PwDbHeaderV4 header;
 	private byte[] hashOfHeader;
 	
-	protected PwDbV4Output(PwDatabaseV4 pm, OutputStream os) {
+	PwDbV4Output(PwDatabaseV4 pm, OutputStream os) {
 		super(os);
 		
 		mPM = pm;
@@ -87,7 +63,7 @@ public class PwDbV4Output extends PwDbOutput {
 
 	@Override
 	public void output() throws PwDbOutputException {
-		header = (PwDbHeaderV4 ) outputHeader(mOS);
+		PwDbHeaderV4 header = (PwDbHeaderV4) outputHeader(mOS);
 		
 		CipherOutputStream cos = attachStreamEncryptor(header, mOS);
 		
@@ -105,11 +81,7 @@ public class PwDbV4Output extends PwDbOutput {
 	
 			outputDatabase(compressed);
 			compressed.close();
-		} catch (IllegalArgumentException e) {
-			throw new PwDbOutputException(e);
-		} catch (IllegalStateException e) {
-			throw new PwDbOutputException(e);
-		} catch (IOException e) {
+		} catch (IllegalArgumentException | IllegalStateException | IOException e) {
 			throw new PwDbOutputException(e);
 		}
 	}
@@ -117,7 +89,7 @@ public class PwDbV4Output extends PwDbOutput {
 	private class GroupWriter extends GroupHandler<PwGroup> {
 		private Stack<PwGroupV4> groupStack;
 		
-		public GroupWriter(Stack<PwGroupV4> gs) {
+		GroupWriter(Stack<PwGroupV4> gs) {
 			groupStack = gs;
 		}
 
@@ -179,7 +151,7 @@ public class PwDbV4Output extends PwDbOutput {
 		PwGroupV4 root = (PwGroupV4) mPM.rootGroup;
 		xml.startTag(null, ElemRoot);
 		startGroup(root);
-		Stack<PwGroupV4> groupStack = new Stack<PwGroupV4>();
+		Stack<PwGroupV4> groupStack = new Stack<>();
 		groupStack.push(root);
 		
 		if (!root.preOrderTraverseTree(new GroupWriter(groupStack), new EntryWriter())) throw new RuntimeException("Writing groups failed");
@@ -251,10 +223,8 @@ public class PwDbV4Output extends PwDbOutput {
 		} catch (Exception e) {
 			throw new PwDbOutputException("Invalid algorithm.");
 		}
-		
-		CipherOutputStream cos = new CipherOutputStream(os, cipher);
-		
-		return cos;
+
+		return new CipherOutputStream(os, cipher);
 	}
 
 	@Override
@@ -301,8 +271,8 @@ public class PwDbV4Output extends PwDbOutput {
 		writeObject(ElemNotes, group.notes);
 		writeObject(ElemIcon, group.icon.iconId);
 		
-		if (!group.customIcon.equals(PwIconCustom.ZERO)) {
-			writeObject(ElemCustomIconID, group.customIcon.uuid);
+		if (!group.customIcon.equals(PwDatabaseV4.UUID_ZERO)) {
+			writeObject(ElemCustomIconID, group.customIcon);
 		}
 		
 		writeList(ElemTimes, group);
@@ -326,8 +296,8 @@ public class PwDbV4Output extends PwDbOutput {
 		writeObject(ElemUuid, entry.uuid);
 		writeObject(ElemIcon, entry.icon.iconId);
 		
-		if (!entry.customIcon.equals(PwIconCustom.ZERO)) {
-			writeObject(ElemCustomIconID, entry.customIcon.uuid);
+		if (!entry.customIcon.equals(PwDatabaseV4.UUID_ZERO)) {
+			writeObject(ElemCustomIconID, entry.customIcon);
 		}
 		
 		writeObject(ElemFgColor, entry.foregroundColor);
@@ -344,7 +314,8 @@ public class PwDbV4Output extends PwDbOutput {
 		if (!isHistory) {
 			writeList(ElemHistory, entry.history, true);
 		} else {
-			assert(entry.history.size() == 0);
+			if(entry.history.size() != 0)
+				throw new IllegalStateException();
 		}
 		
 		xml.endTag(null, ElemEntry);
@@ -502,20 +473,22 @@ public class PwDbV4Output extends PwDbOutput {
 		xml.startTag(null, ElemValue);
 		boolean protect = value.isProtected();
 		if (isEntryString) {
-			if (key.equals(PwDefsV4.TITLE_FIELD)) {
-				protect = mPM.memoryProtection.protectTitle;
-			}
-			else if (key.equals(PwDefsV4.USERNAME_FIELD)) {
-				protect = mPM.memoryProtection.protectUserName;
-			}
-			else if (key.equals(PwDefsV4.PASSWORD_FIELD)) {
-				protect = mPM.memoryProtection.protectPassword;
-			}
-			else if (key.equals(PwDefsV4.URL_FIELD)) {
-				protect = mPM.memoryProtection.protectUrl;
-			}
-			else if (key.equals(PwDefsV4.NOTES_FIELD)) {
-				protect = mPM.memoryProtection.protectNotes;
+			switch (key) {
+				case PwDefsV4.TITLE_FIELD:
+					protect = mPM.memoryProtection.protectTitle;
+					break;
+				case PwDefsV4.USERNAME_FIELD:
+					protect = mPM.memoryProtection.protectUserName;
+					break;
+				case PwDefsV4.PASSWORD_FIELD:
+					protect = mPM.memoryProtection.protectPassword;
+					break;
+				case PwDefsV4.URL_FIELD:
+					protect = mPM.memoryProtection.protectUrl;
+					break;
+				case PwDefsV4.NOTES_FIELD:
+					protect = mPM.memoryProtection.protectNotes;
+					break;
 			}
 		}
 		
@@ -632,16 +605,15 @@ public class PwDbV4Output extends PwDbOutput {
 	}
 
 	private void writeCustomIconList() throws IllegalArgumentException, IllegalStateException, IOException {
-		List<PwIconCustom> customIcons = mPM.customIcons;
-		if (customIcons.size() == 0) return;
+		if (mPM.customIcons.size() == 0) return;
 		
 		xml.startTag(null, ElemCustomIcons);
 		
-		for (PwIconCustom icon : customIcons) {
+		for (Entry<UUID, PwIconCustom> entry : mPM.customIcons.entrySet()) {
 			xml.startTag(null, ElemCustomIconItem);
 			
-			writeObject(ElemCustomIconItemID, icon.uuid);
-			writeObject(ElemCustomIconItemData, String.valueOf(Base64Coder.encode(icon.imageData)));
+			writeObject(ElemCustomIconItemID, entry.getKey());
+			writeObject(ElemCustomIconItemData, String.valueOf(Base64Coder.encode(entry.getValue().imageData)));
 			
 			xml.endTag(null, ElemCustomIconItem);
 		}

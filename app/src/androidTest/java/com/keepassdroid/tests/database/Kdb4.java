@@ -33,7 +33,6 @@ import com.keepassdroid.database.PwDatabaseV4;
 import com.keepassdroid.database.exception.InvalidDBException;
 import com.keepassdroid.database.exception.PwDbOutputException;
 import com.keepassdroid.database.load.Importer;
-import com.keepassdroid.database.load.ImporterFactory;
 import com.keepassdroid.database.load.ImporterV4;
 import com.keepassdroid.database.save.PwDbOutput;
 import com.keepassdroid.database.save.PwDbV4Output;
@@ -48,7 +47,7 @@ public class Kdb4 extends AndroidTestCase {
         AssetManager am = ctx.getAssets();
         InputStream is = am.open("test.kdbx", AssetManager.ACCESS_STREAMING);
 
-        Importer importer = ImporterFactory.createImporter(is);
+        Importer importer = Importer.Factory.createImporter(is);
 
         assertTrue(importer instanceof ImporterV4);
         is.close();

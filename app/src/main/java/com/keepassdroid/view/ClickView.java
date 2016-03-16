@@ -25,15 +25,13 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.keepassdroid.app.App;
-
 public abstract class ClickView extends LinearLayout {
-	protected boolean readOnly = false;
+	protected boolean readOnly = false; // TODO delete
 	
 	public ClickView(Context context) {
 		super(context);
 
-		readOnly = App.getDB().readOnly;
+		//readOnly = db.readOnly; TODO
 	}
 	
 	abstract public void onClick();

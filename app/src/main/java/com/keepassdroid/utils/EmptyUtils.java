@@ -20,7 +20,6 @@
 package com.keepassdroid.utils;
 
 import android.net.Uri;
-
 import com.keepassdroid.database.PwDate;
 import com.keepassdroid.database.PwEntryV3;
 

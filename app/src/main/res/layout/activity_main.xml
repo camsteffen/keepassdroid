@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
+
+    <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:openDrawer="start">
+
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:windowBackground"/>
+
+        <LinearLayout
+                android:id="@+id/left_drawer"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:orientation="vertical"
+                android:background="?android:windowBackground">
+
+            <TextView
+                    android:id="@+id/open_database"
+                    android:onClick="openDatabase"
+                    android:text="@string/open_database"
+                    android:drawableLeft="@drawable/ic_folder_white_24dp"
+                    android:drawableStart="@drawable/ic_folder_white_24dp"
+                    style="@style/DrawerItem"/>
+
+            <TextView
+                    android:id="@+id/create_database"
+                    android:text="@string/create_database"
+                    android:drawableLeft="@drawable/ic_add_circle_white_24dp"
+                    android:drawableStart="@drawable/ic_add_circle_white_24dp"
+                    style="@style/DrawerItem"/>
+
+            <LinearLayout
+                    android:id="@+id/recent_databases_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <View style="@style/Divider"/>
+
+                <TextView
+                        android:text="@string/recent_databases"
+                        style="@style/DrawerHeading"/>
+
+                <ListView
+                        android:id="@+id/recent_databases"
+                        tools:listitem="@layout/recent_database_list_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <TextView
+                    android:id="@+id/settings"
+                    android:text="@string/settings"
+                    android:drawableLeft="@drawable/ic_settings_white_24dp"
+                    android:drawableStart="@drawable/ic_settings_white_24dp"
+                    style="@style/DrawerItem"/>
+
+            <TextView
+                    android:id="@+id/about"
+                    android:text="@string/about"
+                    android:drawableLeft="@drawable/ic_info_white_24dp"
+                    android:drawableStart="@drawable/ic_info_white_24dp"
+                    style="@style/DrawerItem"/>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

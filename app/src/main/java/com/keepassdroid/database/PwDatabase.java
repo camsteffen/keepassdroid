@@ -19,15 +19,14 @@
  */
 package com.keepassdroid.database;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import com.keepassdroid.crypto.finalkey.FinalKey;
+import com.keepassdroid.crypto.finalkey.FinalKeyFactory;
+import com.keepassdroid.database.exception.InvalidKeyFileException;
+import com.keepassdroid.database.exception.KeyFileEmptyException;
+import com.keepassdroid.stream.NullOutputStream;
+import com.keepassdroid.utils.Util;
+
+import java.io.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -36,15 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import android.os.DropBoxManager.Entry;
-
-import com.keepassdroid.crypto.finalkey.FinalKey;
-import com.keepassdroid.crypto.finalkey.FinalKeyFactory;
-import com.keepassdroid.database.exception.InvalidKeyFileException;
-import com.keepassdroid.database.exception.KeyFileEmptyException;
-import com.keepassdroid.stream.NullOutputStream;
-import com.keepassdroid.utils.Util;
-
 public abstract class PwDatabase {
 
     public byte masterKey[] = new byte[32];
@@ -52,31 +42,13 @@ public abstract class PwDatabase {
     public String name = "KeePass database";
     public PwGroup rootGroup;
     public PwIconFactory iconFactory = new PwIconFactory();
-    public Map<PwGroupId, PwGroup> groups = new HashMap<PwGroupId, PwGroup>();
-    public Map<UUID, PwEntry> entries = new HashMap<UUID, PwEntry>();
-
-
-    private static boolean isKDBExtension(String filename) {
-        if (filename == null) { return false; }
-
-        int extIdx = filename.lastIndexOf(".");
-        if (extIdx == -1) return false;
-
-        return filename.substring(extIdx, filename.length()).equalsIgnoreCase(".kdb");
-    }
-
-    public static PwDatabase getNewDBInstance(String filename) {
-        if (isKDBExtension(filename)) {
-            return new PwDatabaseV3();
-        } else {
-            return new PwDatabaseV4();
-        }
-    }
+    public Map<PwGroupId, PwGroup> groups = new HashMap<>();
+    public Map<UUID, PwEntry> entries = new HashMap<>();
 
     public void makeFinalKey(byte[] masterSeed, byte[] masterSeed2, int numRounds) throws IOException {
 
         // Write checksum Checksum
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
@@ -113,7 +85,7 @@ public abstract class PwDatabase {
                 masterKey = getMasterKey(key, keyInputStream);
             }
 
-    protected byte[] getCompositeKey(String key, InputStream keyInputStream)
+    byte[] getCompositeKey(String key, InputStream keyInputStream)
             throws InvalidKeyFileException, IOException {
                 assert(key != null && keyInputStream != null);
 
@@ -133,7 +105,7 @@ public abstract class PwDatabase {
                 return md.digest(fileKey);
     }
 
-    protected byte[] getFileKey(InputStream keyInputStream)
+    byte[] getFileKey(InputStream keyInputStream)
             throws InvalidKeyFileException, IOException {
                 assert(keyInputStream != null);
 
@@ -153,7 +125,6 @@ public abstract class PwDatabase {
                 } else if ( fileSize == 32 ) {
                     return keyData;
                 } else if ( fileSize == 64 ) {
-                    byte[] hex = new byte[64];
 
                     try {
                         return hexStringToByteArray(new String(keyData));
@@ -169,10 +140,8 @@ public abstract class PwDatabase {
                     throw new IOException("SHA-256 not supported");
                 }
                 //SHA256Digest md = new SHA256Digest();
-                byte[] buffer = new byte[2048];
-                int offset = 0;
 
-                try {
+        try {
                     md.update(keyData);
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -183,7 +152,7 @@ public abstract class PwDatabase {
 
     protected abstract byte[] loadXmlKeyFile(InputStream keyInputStream);
 
-    public static byte[] hexStringToByteArray(String s) {
+    private static byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
@@ -216,7 +185,7 @@ public abstract class PwDatabase {
 
     protected abstract String getPasswordEncoding();
 
-    public byte[] getPasswordKey(String key) throws IOException {
+    byte[] getPasswordKey(String key) throws IOException {
         assert(key!=null);
 
         if ( key.length() == 0 )
@@ -233,7 +202,6 @@ public abstract class PwDatabase {
         try {
             bKey = key.getBytes(getPasswordEncoding());
         } catch (UnsupportedEncodingException e) {
-            assert false;
             bKey = key.getBytes();
         }
         md.update(bKey, 0, bKey.length );
@@ -250,8 +218,6 @@ public abstract class PwDatabase {
     public abstract long getNumRounds();
 
     public abstract void setNumRounds(long rounds) throws NumberFormatException;
-
-    public abstract boolean appSettingsEnabled();
 
     public abstract PwEncryptionAlgorithm getEncAlgorithm();
 
@@ -302,11 +268,10 @@ public abstract class PwDatabase {
      *            ID number to check for
      * @return True if the ID is used, false otherwise
      */
-    protected boolean isGroupIdUsed(PwGroupId id) {
+    boolean isGroupIdUsed(PwGroupId id) {
         List<PwGroup> groups = getGroups();
 
-        for (int i = 0; i < groups.size(); i++) {
-            PwGroup group =groups.get(i);
+        for (PwGroup group : groups) {
             if (group.getId().equals(id)) {
                 return true;
             }
@@ -324,13 +289,11 @@ public abstract class PwDatabase {
         List<PwGroup> childGroups = currentGroup.childGroups;
         List<PwEntry> childEntries = currentGroup.childEntries;
 
-        for (int i = 0; i < childEntries.size(); i++ ) {
-            PwEntry cur = childEntries.get(i);
+        for (PwEntry cur : childEntries) {
             entries.put(cur.getUUID(), cur);
         }
 
-        for (int i = 0; i < childGroups.size(); i++ ) {
-            PwGroup cur = childGroups.get(i);
+        for (PwGroup cur : childGroups) {
             groups.put(cur.getId(), cur);
             populateGlobals(cur);
         }
@@ -371,10 +334,4 @@ public abstract class PwDatabase {
     public boolean isGroupSearchable(PwGroup group, boolean omitBackup) {
         return group != null;
     }
-
-    /**
-     * Initialize a newly created database
-     */
-    public abstract void initNew(String dbPath);
-
 }

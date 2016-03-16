@@ -2,8 +2,8 @@ package org.bouncycastle.asn1;
 
 import org.bouncycastle.util.io.Streams;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class BEROctetStringParser
     implements ASN1OctetStringParser

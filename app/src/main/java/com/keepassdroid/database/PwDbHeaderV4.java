@@ -19,15 +19,15 @@
  */
 package com.keepassdroid.database;
 
+import com.keepassdroid.database.exception.InvalidDBVersionException;
+import com.keepassdroid.stream.LEDataInputStream;
+import com.keepassdroid.utils.Types;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import com.keepassdroid.database.exception.InvalidDBVersionException;
-import com.keepassdroid.stream.LEDataInputStream;
-import com.keepassdroid.utils.Types;
 
 public class PwDbHeaderV4 extends PwDbHeader {
 	public static final int DBSIG_PRE2            = 0xB54BFB66;
@@ -226,7 +226,7 @@ public class PwDbHeaderV4 extends PwDbHeader {
 	}
 
 	public static boolean matchesHeader(int sig1, int sig2) {
-		return (sig1 == PWM_DBSIG_1) && ( (sig2 == DBSIG_2) || (sig2 == DBSIG_2) );
+		return sig1 == PWM_DBSIG_1 && sig2 == DBSIG_2;
 	}
     
 }

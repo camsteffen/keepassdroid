@@ -22,7 +22,6 @@ package com.keepassdroid.utils;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-
 import com.keepassdroid.compat.StorageAF;
 
 import java.io.File;

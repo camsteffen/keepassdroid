@@ -19,42 +19,24 @@
  */
 package com.keepassdroid.search;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Queue;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.android.keepass.R;
 import com.keepassdroid.Database;
-import com.keepassdroid.database.PwDatabase;
-import com.keepassdroid.database.PwDatabaseV3;
-import com.keepassdroid.database.PwDatabaseV4;
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwGroup;
-import com.keepassdroid.database.PwGroupV3;
-import com.keepassdroid.database.PwGroupV4;
+import com.keepassdroid.database.*;
+
+import java.util.*;
 
 public class SearchDbHelper {
-	private final Context mCtx;
 	
-	public SearchDbHelper(Context ctx) {
-		mCtx = ctx;
+	private static boolean omitBackup(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(context.getString(R.string.omitbackup_key), context.getResources().getBoolean(R.bool.omitbackup_default));
 	}
 	
-	private boolean omitBackup() {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mCtx);
-		return prefs.getBoolean(mCtx.getString(R.string.omitbackup_key), mCtx.getResources().getBoolean(R.bool.omitbackup_default));
-		
-	}
-	
-	public PwGroup search(Database db, String qStr) {
+	public static PwGroup search(Context context, Database db, String qStr) {
 		PwDatabase pm = db.pm;
 
 		PwGroup group;
@@ -66,15 +48,15 @@ public class SearchDbHelper {
 			Log.d("SearchDbHelper", "Tried to search with unknown db");
 			return null;
 		}
-		group.name = mCtx.getString(R.string.search_results);
-		group.childEntries = new ArrayList<PwEntry>();
+		group.name = context.getString(R.string.search_results);
+		group.childEntries = new ArrayList<>();
 		
 		// Search all entries
 		Locale loc = Locale.getDefault();
 		qStr = qStr.toLowerCase(loc);
-		boolean isOmitBackup = omitBackup();
+		boolean isOmitBackup = omitBackup(context);
 		
-		Queue<PwGroup> worklist = new LinkedList<PwGroup>();
+		Queue<PwGroup> worklist = new LinkedList<>();
 		if (pm.rootGroup != null) {
 			worklist.add(pm.rootGroup);
 		}
@@ -84,7 +66,7 @@ public class SearchDbHelper {
 			
 			if (pm.isGroupSearchable(top, isOmitBackup)) {
 				for (PwEntry entry : top.childEntries) {
-					processEntries(entry, group.childEntries, qStr, loc);
+					SearchDbHelper.processEntries(entry, group.childEntries, qStr, loc);
 				}
 				
 				for (PwGroup childGroup : top.childGroups) {
@@ -98,7 +80,7 @@ public class SearchDbHelper {
 		return group;
 	}
 	
-	public void processEntries(PwEntry entry, List<PwEntry> results, String qStr, Locale loc) {
+	private static void processEntries(PwEntry entry, List<PwEntry> results, String qStr, Locale loc) {
 		// Search all strings in the entry
 		Iterator<String> iter = entry.stringIterator();
 		while (iter.hasNext()) {

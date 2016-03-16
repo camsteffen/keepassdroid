@@ -48,7 +48,7 @@
     <string name="database">База даних</string>
     <string name="decrypting_db">Розшифрування змісту бази даних&#8230;</string>
     <string name="decrypting_entry">Розшифрування запису</string>
-    <string name="default_checkbox">Використовувати як мою типову базу даних</string>
+    <string name="set_default_database">Використовувати як мою типову базу даних</string>
     <string name="digits">Цифри</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin comes with ABSOLUTELY NO WARRANTY; This is free software, and you are welcome to redistribute it under the conditions of the GPL version 2 or later.</string>
     <string name="ellipsis">\u2026</string>
@@ -68,7 +68,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Ім’я користувача: </string>
     <string name="error_arc4">Потокове шифрування ArcFour не підтримується.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid не може опрацювати цю адресу.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid не може опрацювати цю адресу.</string>
     <string name="error_could_not_create_group">Помилка створення групи.</string>
     <string name="error_could_not_create_parent">Не вдалося створити батьківський каталог.</string>
     <string name="error_database_exists">Файл вже існує.</string>
@@ -87,7 +87,7 @@
     <string name="error_rounds_too_large">Надто багато циклів.  Установлено 2147483648.</string>
     <string name="error_title_required">Необхідно вказати заголовок.</string>
     <string name="error_wrong_length">Введіть ціле число на усю довжину поля</string>
-    <string name="FileNotFound">Файл не знайдено.</string>
+    <string name="file_not_found">Файл не знайдено.</string>
     <string name="file_browser">Перегляд файлів</string>
     <string name="generate_password">Згенерувати пароль</string>
     <string name="group">Група</string>
@@ -114,12 +114,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Маска пароля</string>
     <string name="maskpass_summary">Приховати паролі за замовчуванням</string>
-    <string name="menu_about">Про</string>
+    <string name="about">Про</string>
     <string name="menu_change_key">Змінити головний ключ</string>
     <string name="menu_copy_pass">Копіювати пароль</string>
     <string name="menu_copy_user">Копіювати користувача</string>
     <string name="menu_create">Створити</string>
-    <string name="menu_app_settings">Налаштування</string>
+    <string name="settings">Налаштування</string>
     <string name="menu_db_settings">Налаштування бази даних</string>
     <string name="menu_delete">Вилучити</string>
     <string name="menu_donate">Пожертвувати</string>
@@ -127,7 +127,7 @@
     <string name="menu_hide_password">Приховати пароль</string>
     <string name="menu_homepage">Перейти на домашню сторінку</string>
     <string name="menu_lock">Блокувати базу даних</string>
-    <string name="menu_open">Відкрити</string>
+    <string name="open">Відкрити</string>
     <string name="menu_rename">Перейменувати</string>
     <string name="menu_search">Пошук</string>
     <string name="menu_showpass">Показати пароль</string>

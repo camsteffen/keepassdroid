@@ -19,19 +19,17 @@
  */
 package com.keepassdroid.crypto;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
+import android.os.Build;
+import com.keepassdroid.utils.Types;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import android.os.Build;
-
-import com.keepassdroid.utils.Types;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 public class CipherFactory {
 	private static boolean blacklistInit = false;

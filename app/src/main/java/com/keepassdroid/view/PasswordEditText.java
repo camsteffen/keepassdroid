@@ -23,7 +23,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
-
 import com.keepassdroid.assets.TypefaceFactory;
 
 public class PasswordEditText extends EditText {

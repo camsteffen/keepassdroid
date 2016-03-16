@@ -19,31 +19,21 @@
  */
 package com.keepassdroid;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.SyncFailedException;
-import java.util.HashSet;
-import java.util.Set;
-
 import android.content.Context;
 import android.net.Uri;
-
 import com.keepassdroid.database.PwDatabase;
 import com.keepassdroid.database.PwDatabaseV3;
 import com.keepassdroid.database.PwGroup;
-import com.keepassdroid.database.exception.ContentFileNotFoundException;
 import com.keepassdroid.database.exception.InvalidDBException;
 import com.keepassdroid.database.exception.PwDbOutputException;
 import com.keepassdroid.database.load.Importer;
-import com.keepassdroid.database.load.ImporterFactory;
 import com.keepassdroid.database.save.PwDbOutput;
 import com.keepassdroid.icons.DrawableFactory;
 import com.keepassdroid.search.SearchDbHelper;
-import com.keepassdroid.utils.UriUtil;
+
+import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author bpellin
@@ -52,96 +42,41 @@ public class Database {
     public Set<PwGroup> dirty = new HashSet<>();
     public PwDatabase pm;
     public Uri mUri;
-    private SearchDbHelper searchHelper;
-    public boolean readOnly = false;
-    boolean passwordEncodingError = false;
+    boolean readOnly = false;
 
-    public DrawableFactory drawFactory = new DrawableFactory();
+    DrawableFactory drawFactory = new DrawableFactory();
 
-    private boolean loaded = false;
-
-    public boolean Loaded() {
-        return loaded;
+    public Database(InputStream is, String password, InputStream kfIs) throws IOException, InvalidDBException {
+        this(is, password, kfIs, null);
     }
 
-    public void setLoaded() {
-        loaded = true;
-    }
-
-    public void LoadData(Context ctx, Uri uri, String password, Uri keyfile, UpdateStatus status) throws IOException, InvalidDBException {
-        LoadData(ctx, uri, password, keyfile, status, !Importer.DEBUG);
-    }
-
-    private void LoadData(Context ctx, Uri uri, String password, Uri keyfile, UpdateStatus status, boolean debug) throws IOException, InvalidDBException {
-        mUri = uri;
-        readOnly = false;
-        if (uri.getScheme().equals("file")) {
-            File file = new File(uri.getPath());
-            readOnly = !file.canWrite();
-        }
-
-        InputStream is, kfIs;
-        try {
-            is = UriUtil.getUriInputStream(ctx, uri);
-        } catch (Exception e) {
-            throw ContentFileNotFoundException.getInstance(uri);
-        }
-
-        try {
-            kfIs = UriUtil.getUriInputStream(ctx, keyfile);
-        } catch (Exception e) {
-            throw ContentFileNotFoundException.getInstance(keyfile);
-        }
-        LoadData(ctx, is, password, kfIs, status, debug);
-
-    }
-
-    public void LoadData(Context ctx, InputStream is, String password, InputStream kfIs, boolean debug) throws IOException, InvalidDBException {
-        LoadData(ctx, is, password, kfIs, new UpdateStatus(), debug);
-    }
-
-    private void LoadData(Context ctx, InputStream is, String password, InputStream kfIs, UpdateStatus status, boolean debug) throws IOException, InvalidDBException {
-
+    public Database(InputStream is, String password, InputStream kfIs, MyProgressTask status) throws IOException, InvalidDBException {
         BufferedInputStream bis = new BufferedInputStream(is);
-
-        if ( ! bis.markSupported() ) {
-            throw new IOException("Input stream does not support mark.");
-        }
 
         // We'll end up reading 8 bytes to identify the header. Might as well use two extra.
         bis.mark(10);
 
-        Importer imp = ImporterFactory.createImporter(bis, debug);
+        Importer importer = Importer.Factory.createImporter(bis);
 
         bis.reset();  // Return to the start
 
-        pm = imp.openDatabase(bis, password, kfIs, status);
-        if ( pm != null ) {
+        pm = importer.openDatabase(bis, password, kfIs, status);
+
+        if (pm != null) {
             PwGroup root = pm.rootGroup;
 
             pm.populateGlobals(root);
 
-            LoadData(ctx, pm, password);
+            if (pm != null) {
+                if(!pm.validatePasswordEncoding(password)) {
+                    throw new RuntimeException("validatePasswordEncoding failed");
+                }
+            }
         }
-
-        loaded = true;
     }
 
-    private void LoadData(Context ctx, PwDatabase pm, String password) {
-        if ( pm != null ) {
-            passwordEncodingError = !pm.validatePasswordEncoding(password);
-        }
-
-        searchHelper = new SearchDbHelper(ctx);
-
-        loaded = true;
-    }
-
-    public PwGroup Search(String str) {
-        if (searchHelper == null) { return null; }
-
-        return searchHelper.search(this, str);
-
+    public PwGroup Search(Context context, String str) {
+        return SearchDbHelper.search(context, this, str);
     }
 
     public void SaveData(Context ctx) throws IOException, PwDbOutputException {
@@ -175,8 +110,7 @@ public class Database {
             if (!tempFile.renameTo(orig)) {
                 throw new IOException("Failed to store database.");
             }
-        }
-        else {
+        } else {
             OutputStream os;
             try {
                 os = ctx.getContentResolver().openOutputStream(uri);
@@ -195,24 +129,14 @@ public class Database {
 
     }
 
-    public void clear() {
-        dirty.clear();
-        drawFactory.clear();
-
-        pm = null;
-        mUri = null;
-        loaded = false;
-        passwordEncodingError = false;
-    }
-
     void markAllGroupsAsDirty() {
-        for ( PwGroup group : pm.getGroups() ) {
+        for (PwGroup group : pm.getGroups()) {
             dirty.add(group);
         }
 
         // TODO: This should probably be abstracted out
         // The root group in v3 is not an 'official' group
-        if ( pm instanceof PwDatabaseV3 ) {
+        if (pm instanceof PwDatabaseV3) {
             dirty.add(pm.rootGroup);
         }
     }

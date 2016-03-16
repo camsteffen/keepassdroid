@@ -30,7 +30,11 @@ Copyright 2006 Bill Zwicky <billzwicky@users.sourceforge.net>
 
 package com.keepassdroid.database;
 
-import java.security.acl.LastOwnerException;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import com.keepassdroid.GroupFragment;
+import com.keepassdroid.GroupFragmentV3;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -97,11 +101,6 @@ public class PwGroupV3 extends PwGroup {
 	}
 
 	@Override
-	public Date getLastMod() {
-		return tLastMod.getJDate();
-	}
-
-	@Override
 	public void setParent(PwGroup prt) {
 		parent = (PwGroupV3) prt;
 		level = parent.level + 1;
@@ -156,4 +155,12 @@ public class PwGroupV3 extends PwGroup {
 		tLastMod = new PwDate(date);
 	}
 
+	@Override
+	public Fragment createFragment() {
+		GroupFragment fragment = new GroupFragmentV3();
+		Bundle args = new Bundle();
+		args.putInt(GroupFragment.KEY_ENTRY, groupId);
+		fragment.setArguments(args);
+		return fragment;
+	}
 }

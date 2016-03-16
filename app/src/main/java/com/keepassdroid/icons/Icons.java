@@ -19,11 +19,10 @@
  */
 package com.keepassdroid.icons;
 
-import java.lang.reflect.Field;
-
 import android.util.SparseIntArray;
-
 import com.android.keepass.R;
+
+import java.lang.reflect.Field;
 
 
 public class Icons {

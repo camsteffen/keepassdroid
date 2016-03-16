@@ -50,7 +50,7 @@
     <string name="database">Database</string>
     <string name="decrypting_db">Databaseinhoud wordt ontcijferd&#8230;</string>
     <string name="decrypting_entry">Record wordt ontcijferd</string>
-    <string name="default_checkbox">Gebruik dit als mijn standaard database</string>
+    <string name="set_default_database">Gebruik dit als mijn standaard database</string>
     <string name="digits">Cijfers</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin biedt GEEN ENKELE GARANTIE; Dit is vrije software, u mag deze software verspreiden onder de voorwaarden van de GPL versie 2 of recenter.</string>
     <string name="ellipsis">\u2026</string>
@@ -70,7 +70,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Gebruikersnaam: </string>
     <string name="error_arc4">De ArcFour stream-versleuteling wordt niet ondersteund.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid kan deze uri niet verwerken.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid kan deze uri niet verwerken.</string>
     <string name="error_could_not_create_group">Fout bij het aanmaken van de groep.</string>
     <string name="error_could_not_create_parent">Kan de hogerliggende map niet aanmaken.</string>
     <string name="error_database_exists">Dit bestand bestaat reeds.</string>
@@ -89,7 +89,7 @@
     <string name="error_rounds_too_large">Cycli-waarde te groot. Ik gebruik 2147483648.</string>
     <string name="error_title_required">Een titel ontbreekt.</string>
     <string name="error_wrong_length">Geef een positief geheel getal voor het lengteveld</string>
-    <string name="FileNotFound">Bestand niet gevonden.</string>
+    <string name="file_not_found">Bestand niet gevonden.</string>
     <string name="file_browser">Verkenner</string>
     <string name="generate_password">Genereer wachtwoord</string>
     <string name="group">Groep</string>
@@ -116,12 +116,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Maskeer wachtwoord</string>
     <string name="maskpass_summary">Verberg wachtwoorden standaardmatig</string>
-    <string name="menu_about">Over</string>
+    <string name="about">Over</string>
     <string name="menu_change_key">Wijzig hoofdsleutel</string>
     <string name="menu_copy_pass">Kopieer wachtwoord</string>
     <string name="menu_copy_user">Kopieer gebruikersnaam</string>
     <string name="menu_create">Aanmaken</string>
-    <string name="menu_app_settings">Instellingen</string>
+    <string name="settings">Instellingen</string>
     <string name="menu_db_settings">Database-instellingen</string>
     <string name="menu_delete">Wissen</string>
     <string name="menu_donate">Doneren</string>
@@ -129,7 +129,7 @@
     <string name="menu_hide_password">Wachtwoord verbergen</string>
     <string name="menu_homepage">Ga naar homepage</string>
     <string name="menu_lock">Vergrendel database</string>
-    <string name="menu_open">Openen</string>
+    <string name="open">Openen</string>
     <string name="menu_rename">Hernoemen</string>
     <string name="menu_search">Zoeken</string>
     <string name="menu_showpass">Toon wachtwoord</string>

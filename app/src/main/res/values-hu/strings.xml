@@ -35,7 +35,7 @@
     <string name="database">Adatbázis</string>
     <string name="decrypting_db">Adatbázis tartalmának dekódolása…</string>
     <string name="decrypting_entry">Bejegyzés dekódolása</string>
-    <string name="default_checkbox">Adatbázis beállítása alapértelmezettként</string>
+    <string name="set_default_database">Adatbázis beállítása alapértelmezettként</string>
     <string name="digits">Számok</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009–2012 Brian Pellin. Ehhez a programhoz SEMMILYEN GARANCIA NEM JÁR; Ez egy szabad szoftver, GNU General Public License v2 vagy későbbi verziójának feltételei mellett terjeszthető, illetve módosítható. Fordította: intel</string>
     <string name="ellipsis">…</string>
@@ -55,7 +55,7 @@
     <string name="entry_url">URL:</string>
     <string name="entry_user_name">Felhasználónév:</string>
     <string name="error_arc4">Az ArcFour folyamrejtjel nem támogatott.</string>
-    <string name="error_can_not_handle_uri">Nem található kezelő ehhez az uri-hoz.</string>
+    <string name="error_cannot_handle_uri">Nem található kezelő ehhez az uri-hoz.</string>
     <string name="error_could_not_create_group">Hiba a csoport létrehozásakor.</string>
     <string name="error_could_not_create_parent">Nem sikerült létrehozni szülő könyvtárat.</string>
     <string name="error_database_exists">A fájl már létezik.</string>
@@ -77,7 +77,7 @@
     <string name="error_wrong_length">Írjon be egy pozitív egész számot a hossz mezőbe</string>
     <string name="field_name">Megnevezés</string>
     <string name="field_value">Érték</string>
-    <string name="FileNotFound">A fájl nem található.</string>
+    <string name="file_not_found">A fájl nem található.</string>
     <string name="file_browser">Fájlkezelő</string>
     <string name="generate_password">Jelszó generálás</string>
     <string name="group">Csoport</string>
@@ -97,7 +97,7 @@
     <string name="InvalidPassword">Érvénytelen jelszó vagy kulcsfájl.</string>
     <string name="invalid_algorithm">Érvénytelen algoritmus.</string>
     <string name="invalid_db_sig">Az adabázis formátuma nem ismert.</string>
-    <string name="keyfile_does_not_exist">A kulcsfájl nem létezik.</string>
+    <string name="key_file_not_found">A kulcsfájl nem létezik.</string>
     <string name="keyfile_is_empty">A kulcsfájl üres.</string>
     <string name="length">Hossz</string>
     <string name="list_size_title">Csoportok betűmérete</string>
@@ -107,12 +107,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Jelszó elrejtése</string>
     <string name="maskpass_summary">Jelszavak elrejtése alapértelmezésben</string>
-    <string name="menu_about">Névjegy</string>
+    <string name="about">Névjegy</string>
     <string name="menu_change_key">Mesterkulcs megváltoztatása</string>
     <string name="menu_copy_pass">Jelszó másolása</string>
     <string name="menu_copy_user">Felhasználónév másolása</string>
     <string name="menu_create">Létrehozás</string>
-    <string name="menu_app_settings">Beállítások</string>
+    <string name="settings">Beállítások</string>
     <string name="menu_db_settings">Adatbázis beállítások</string>
     <string name="menu_delete">Törlés</string>
     <string name="menu_donate">Támogatás</string>
@@ -120,7 +120,7 @@
     <string name="menu_hide_password">Jelszó elrejtése</string>
     <string name="menu_homepage">Weboldal megtekintése</string>
     <string name="menu_lock">Adatbázis lezárása</string>
-    <string name="menu_open">Megnyitás</string>
+    <string name="open">Megnyitás</string>
     <string name="menu_rename">Átnevezés</string>
     <string name="menu_search">Keresés</string>
     <string name="menu_showpass">Jelszó megjelenítése</string>

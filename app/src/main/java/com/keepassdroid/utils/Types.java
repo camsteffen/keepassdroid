@@ -42,12 +42,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 package com.keepassdroid.utils;
 
+import com.keepassdroid.stream.LEDataOutputStream;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
-
-import com.keepassdroid.stream.LEDataOutputStream;
 
 
 /**

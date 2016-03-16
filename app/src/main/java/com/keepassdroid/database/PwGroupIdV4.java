@@ -1,5 +1,8 @@
 package com.keepassdroid.database;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.UUID;
 
 public class PwGroupIdV4 extends PwGroupId {
@@ -29,4 +32,27 @@ public class PwGroupIdV4 extends PwGroupId {
 		return uuid;
 	}
 
+	public static final Parcelable.Creator<PwGroupIdV4> CREATOR
+			= new Parcelable.Creator<PwGroupIdV4>() {
+		@Override
+		public PwGroupIdV4 createFromParcel(Parcel source) {
+			UUID uuid = (UUID) source.readSerializable();
+			return new PwGroupIdV4(uuid);
+		}
+
+		@Override
+		public PwGroupIdV4[] newArray(int size) {
+			return new PwGroupIdV4[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeSerializable(uuid);
+	}
 }

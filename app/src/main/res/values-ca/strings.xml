@@ -51,7 +51,7 @@
     <string name="database">Base de dades</string>
     <string name="decrypting_db">Desencriptant continguts de la base de dades&#8230;</string>
     <string name="decrypting_entry">Desencriptant entrada</string>
-    <string name="default_checkbox">Utilitza aquesta com a base de dades per defecte</string>
+    <string name="set_default_database">Utilitza aquesta com a base de dades per defecte</string>
     <string name="digits">Dígits</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin ve SENSE CAP MENA DE GARANTIA; Això és programari lliure, i pots redistribuïr-lo sota els termes de la llicència GPL versió 2 o posterior.</string>
     <string name="ellipsis">\u2026</string>
@@ -71,7 +71,7 @@
     <string name="entry_url">URL: </string>
     <string name="entry_user_name">Usuari: </string>
     <string name="error_arc4">L\'encriptació ArcFour no està suportada.</string>
-    <string name="error_can_not_handle_uri">KeePassDroid no pot manejar aquesta uri.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid no pot manejar aquesta uri.</string>
     <string name="error_could_not_create_group">Error creant grup.</string>
     <string name="error_could_not_create_parent">No s\'ha pogut crear el directori pare.</string>
     <string name="error_database_exists">Aquest arxiu ja existeix.</string>
@@ -90,7 +90,7 @@
     <string name="error_rounds_too_large">Massa passades. Establint a 2147483648.</string>
     <string name="error_title_required">És necessari un títol.</string>
     <string name="error_wrong_length">Insereix un enter positiu al camp longitud</string>
-    <string name="FileNotFound">Arxiu no trobat.</string>
+    <string name="file_not_found">Arxiu no trobat.</string>
     <string name="file_browser">Explorador d\'arxius</string>
     <string name="generate_password">Generar contrasenya</string>
     <string name="group">Grup</string>
@@ -117,12 +117,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Emmascara contrasenya</string>
     <string name="maskpass_summary">Amaga les contrasenyes per defecte</string>
-    <string name="menu_about">Sobre</string>
+    <string name="about">Sobre</string>
     <string name="menu_change_key">Canvia Clau Mestra</string>
     <string name="menu_copy_pass">Copia contrasenya</string>
     <string name="menu_copy_user">Copia usuari</string>
     <string name="menu_create">Crear</string>
-    <string name="menu_app_settings">Paràmetres</string>
+    <string name="settings">Paràmetres</string>
     <string name="menu_db_settings">Paràmetres de la base de dades</string>
     <string name="menu_delete">Esborra</string>
     <string name="menu_donate">Donar</string>
@@ -130,7 +130,7 @@
     <string name="menu_hide_password">Amaga contrasenya</string>
     <string name="menu_homepage">Vés a l\'inici</string>
     <string name="menu_lock">Bloqueja la base de dades</string>
-    <string name="menu_open">Obre</string>
+    <string name="open">Obre</string>
     <string name="menu_rename">Reanomena</string>
     <string name="menu_search">Cerca</string>
     <string name="menu_showpass">Mostra contrasenya</string>

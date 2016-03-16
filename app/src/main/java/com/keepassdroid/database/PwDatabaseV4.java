@@ -19,38 +19,23 @@
  */
 package com.keepassdroid.database;
 
-import java.io.FileInputStream;
+import biz.source_code.base64Coder.Base64Coder;
+import com.keepassdroid.crypto.CipherFactory;
+import com.keepassdroid.database.exception.InvalidKeyFileException;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-
-import android.webkit.URLUtil;
-import biz.source_code.base64Coder.Base64Coder;
-
-import com.keepassdroid.crypto.CipherFactory;
-import com.keepassdroid.database.exception.InvalidKeyFileException;
-import com.keepassdroid.utils.EmptyUtils;
+import java.util.*;
 
 
 public class PwDatabaseV4 extends PwDatabase {
 
-	public static final Date DEFAULT_NOW = new Date();
+	static final Date DEFAULT_NOW = new Date();
     public static final UUID UUID_ZERO = new UUID(0,0);
 	private static final int DEFAULT_HISTORY_MAX_ITEMS = 10; // -1 unlimited
 	private static final long DEFAULT_HISTORY_MAX_SIZE = 6 * 1024 * 1024; // -1 unlimited
@@ -81,9 +66,9 @@ public class PwDatabaseV4 extends PwDatabase {
     public UUID lastSelectedGroup = UUID_ZERO;
     public UUID lastTopVisibleGroup = UUID_ZERO;
     public MemoryProtectionConfig memoryProtection = new MemoryProtectionConfig();
-    public List<PwDeletedObject> deletedObjects = new ArrayList<PwDeletedObject>();
-    public List<PwIconCustom> customIcons = new ArrayList<PwIconCustom>();
-    public Map<String, String> customData = new HashMap<String, String>();
+    public List<PwDeletedObject> deletedObjects = new ArrayList<>();
+    public HashMap<UUID, PwIconCustom> customIcons = new HashMap<>();
+    public Map<String, String> customData = new HashMap<>();
     
     public String localizedAppName = "KeePassDroid";
     
@@ -95,17 +80,8 @@ public class PwDatabaseV4 extends PwDatabase {
     	public boolean protectNotes = false;
     	
     	public boolean autoEnableVisualHiding = false;
-    	
-    	public boolean GetProtection(String field) {
-    		if ( field.equalsIgnoreCase(PwDefsV4.TITLE_FIELD)) return protectTitle;
-    		if ( field.equalsIgnoreCase(PwDefsV4.USERNAME_FIELD)) return protectUserName;
-    		if ( field.equalsIgnoreCase(PwDefsV4.PASSWORD_FIELD)) return protectPassword;
-    		if ( field.equalsIgnoreCase(PwDefsV4.URL_FIELD)) return protectUrl;
-    		if ( field.equalsIgnoreCase(PwDefsV4.NOTES_FIELD)) return protectNotes;
-    		
-    		return false;
-    	}
-    }
+
+	}
     
 	@Override
 	public byte[] getMasterKey(String key, InputStream keyInputStream)
@@ -190,7 +166,7 @@ public class PwDatabaseV4 extends PwDatabase {
 
 	@Override
 	public List<PwGroup> getGroups() {
-		List<PwGroup> list = new ArrayList<PwGroup>();
+		List<PwGroup> list = new ArrayList<>();
 		PwGroupV4 root = (PwGroupV4) rootGroup;
 		root.buildChildGroupsRecursive(list);
 		
@@ -204,7 +180,7 @@ public class PwDatabaseV4 extends PwDatabase {
 
 	@Override
 	public List<PwEntry> getEntries() {
-		List<PwEntry> list = new ArrayList<PwEntry>();
+		List<PwEntry> list = new ArrayList<>();
 		PwGroupV4 root = (PwGroupV4) rootGroup;
 		root.buildChildEntriesRecursive(list);
 		
@@ -223,18 +199,13 @@ public class PwDatabaseV4 extends PwDatabase {
 	}
 
 	@Override
-	public boolean appSettingsEnabled() {
-		return false;
-	}
-
-	@Override
 	public PwEncryptionAlgorithm getEncAlgorithm() {
 		return PwEncryptionAlgorithm.Rjindal;
 	}
 
 	@Override
 	public PwGroupIdV4 newGroupId() {
-		PwGroupIdV4 id = new PwGroupIdV4(UUID_ZERO);
+		PwGroupIdV4 id;
 		
 		while (true) {
 			id = new PwGroupIdV4(UUID.randomUUID());
@@ -252,11 +223,8 @@ public class PwDatabaseV4 extends PwDatabase {
 
 	@Override
 	public boolean isBackup(PwGroup group) {
-		if (!recycleBinEnabled) {
-			return false;
-		}
-		
-		return group.isContainedIn(getRecycleBin());
+		return recycleBinEnabled && group.isContainedIn(getRecycleBin());
+
 	}
 
 	@Override
@@ -369,26 +337,4 @@ public class PwDatabaseV4 extends PwDatabase {
 		return true;
 	}
 
-	@Override
-	public void initNew(String dbPath) {
-		String filename = URLUtil.guessFileName(dbPath, null, null);
-		
-		rootGroup = new PwGroupV4(true, true, dbNameFromPath(dbPath), iconFactory.getIcon(PwIconStandard.FOLDER));
-		groups.put(rootGroup.getId(), rootGroup);
-	}
-	
-	private String dbNameFromPath(String dbPath) {
-		String filename = URLUtil.guessFileName(dbPath, null, null);
-		
-		if (EmptyUtils.isNullOrEmpty(filename)) {
-			return "KeePass Database";
-		}
-		int lastExtDot = filename.lastIndexOf(".");
-		if (lastExtDot == -1) {
-			return filename;
-		}
-		
-		return filename.substring(0, lastExtDot);
-	}
-	
 }

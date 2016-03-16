@@ -32,14 +32,14 @@ public class UpdateStatus {
 		
 	}
 	
-	public UpdateStatus(Context ctx, Handler handler, ProgressDialog pd) {
+	UpdateStatus(Context ctx, Handler handler, ProgressDialog pd) {
 		mCtx = ctx;
 		mPD = pd;
 		mHandler = handler;
 	}
 	
 	public void updateMessage(int resId) {
-		if ( mCtx != null && mPD != null && mHandler != null ) {
+		if (mCtx != null && mPD != null) {
 			mHandler.post(new UpdateMessage(resId));
 		}
 	}
@@ -47,13 +47,12 @@ public class UpdateStatus {
 	private class UpdateMessage implements Runnable {
 		private int mResId;
 		
-		public UpdateMessage(int resId) {
+		UpdateMessage(int resId) {
 			mResId = resId;
 		}
 		
 		public void run() {
 			mPD.setMessage(mCtx.getString(mResId));
 		}
-		
 	}
 }

@@ -20,7 +20,6 @@
 package com.keepassdroid;
 
 import android.preference.PreferenceActivity;
-
 import com.keepassdroid.timeout.TimeoutHelper;
 
 public abstract class LockingPreferenceActivity extends PreferenceActivity {

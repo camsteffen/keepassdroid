@@ -1,15 +1,8 @@
 package org.bouncycastle.asn1.pkcs;
 
-import java.math.BigInteger;
+import org.bouncycastle.asn1.*;
 
-import org.bouncycastle.asn1.ASN1Encodable;
-import org.bouncycastle.asn1.ASN1EncodableVector;
-import org.bouncycastle.asn1.ASN1OctetString;
-import org.bouncycastle.asn1.ASN1Sequence;
-import org.bouncycastle.asn1.DERInteger;
-import org.bouncycastle.asn1.DERObject;
-import org.bouncycastle.asn1.DEROctetString;
-import org.bouncycastle.asn1.DERSequence;
+import java.math.BigInteger;
 
 public class RC2CBCParameter
     extends ASN1Encodable

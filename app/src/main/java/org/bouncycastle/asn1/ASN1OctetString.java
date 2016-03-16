@@ -1,7 +1,7 @@
 package org.bouncycastle.asn1;
 
-import org.bouncycastle.util.encoders.Hex;
 import org.bouncycastle.util.Arrays;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -1,12 +1,8 @@
 package org.bouncycastle.asn1;
 
-import java.io.ByteArrayInputStream;
-import java.io.EOFException;
-import java.io.FilterInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.bouncycastle.util.io.Streams;
+
+import java.io.*;
 
 /**
  * a general purpose ASN.1 decoder - note: this class differs from the

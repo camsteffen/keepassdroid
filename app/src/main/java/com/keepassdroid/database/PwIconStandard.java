@@ -19,16 +19,27 @@
  */
 package com.keepassdroid.database;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import com.keepassdroid.icons.Icons;
+
 public class PwIconStandard extends PwIcon {
 	public final int iconId;
 	
-	public static PwIconStandard FIRST = new PwIconStandard(1);
+	static PwIconStandard FIRST = new PwIconStandard(1);
 	
-	public static final int TRASH_BIN = 43;
-	public static final int FOLDER = 48;
+	static final int TRASH_BIN = 43;
+	static final int FOLDER = 48; // TODO make default
 	
 	public PwIconStandard(int iconId) {
 		this.iconId = iconId;
+	}
+
+	@Override
+	public Drawable getDrawable(Context context) {
+		int resId = Icons.iconToResId(iconId);
+		return ContextCompat.getDrawable(context, resId);
 	}
 
 	@Override
@@ -53,8 +64,6 @@ public class PwIconStandard extends PwIcon {
 		if (getClass() != obj.getClass())
 			return false;
 		PwIconStandard other = (PwIconStandard) obj;
-		if (iconId != other.iconId)
-			return false;
-		return true;
+		return iconId == other.iconId;
 	}
 }

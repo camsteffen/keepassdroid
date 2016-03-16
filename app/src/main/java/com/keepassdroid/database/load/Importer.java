@@ -19,22 +19,37 @@
  */
 package com.keepassdroid.database.load;
 
+import com.keepassdroid.MyProgressTask;
+import com.keepassdroid.database.PwDatabase;
+import com.keepassdroid.database.PwDbHeaderV3;
+import com.keepassdroid.database.PwDbHeaderV4;
+import com.keepassdroid.database.exception.InvalidDBException;
+import com.keepassdroid.stream.LEDataInputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.keepassdroid.UpdateStatus;
-import com.keepassdroid.database.PwDatabase;
-import com.keepassdroid.database.exception.InvalidDBException;
-
 public abstract class Importer {
-
-	public static final boolean DEBUG = true;
 
 	public abstract PwDatabase openDatabase( InputStream inStream, String password, InputStream keyInputStream)
 		throws IOException, InvalidDBException;
 
-	public abstract PwDatabase openDatabase( InputStream inStream, String password, InputStream keyInputStream, UpdateStatus status )
+	public abstract PwDatabase openDatabase( InputStream inStream, String password, InputStream keyInputStream, MyProgressTask status )
 		throws IOException, InvalidDBException;
 
+	public static class Factory {
 
+        public static Importer createImporter(InputStream is) throws IOException, InvalidDBException {
+            int sig1 = LEDataInputStream.readInt(is);
+            int sig2 = LEDataInputStream.readInt(is);
+
+            if (PwDbHeaderV3.matchesHeader(sig1, sig2)) {
+                return new ImporterV3();
+            } else if (PwDbHeaderV4.matchesHeader(sig1, sig2)) {
+                return new ImporterV4();
+            } else {
+                throw new InvalidDBException();
+            }
+        }
+    }
 }

@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.android.keepass.R;
 
 public class AboutDialog extends Dialog {

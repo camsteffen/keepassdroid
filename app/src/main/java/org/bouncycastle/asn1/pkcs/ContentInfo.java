@@ -1,16 +1,8 @@
 package org.bouncycastle.asn1.pkcs;
 
-import java.util.Enumeration;
+import org.bouncycastle.asn1.*;
 
-import org.bouncycastle.asn1.ASN1Encodable;
-import org.bouncycastle.asn1.ASN1EncodableVector;
-import org.bouncycastle.asn1.ASN1Sequence;
-import org.bouncycastle.asn1.BERSequence;
-import org.bouncycastle.asn1.BERTaggedObject;
-import org.bouncycastle.asn1.DEREncodable;
-import org.bouncycastle.asn1.DERObject;
-import org.bouncycastle.asn1.DERObjectIdentifier;
-import org.bouncycastle.asn1.DERTaggedObject;
+import java.util.Enumeration;
 
 @SuppressWarnings("unchecked")
 public class ContentInfo

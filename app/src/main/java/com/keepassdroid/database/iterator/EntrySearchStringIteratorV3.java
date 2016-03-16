@@ -19,10 +19,10 @@
  */
 package com.keepassdroid.database.iterator;
 
-import java.util.NoSuchElementException;
-
 import com.keepassdroid.database.PwEntryV3;
 import com.keepassdroid.database.SearchParameters;
+
+import java.util.NoSuchElementException;
 
 public class EntrySearchStringIteratorV3 extends EntrySearchStringIterator {
 	

@@ -19,41 +19,43 @@
  */
 package com.keepassdroid.database;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import com.android.keepass.R;
+import com.keepassdroid.compat.BitmapDrawableCompat;
+
 import java.util.UUID;
 
 public class PwIconCustom extends PwIcon {
-	public static final PwIconCustom ZERO = new PwIconCustom(PwDatabaseV4.UUID_ZERO, new byte[0]);
-	
-	public final UUID uuid;
+    private static final int SIZE = 24;
+
 	public byte[] imageData;
-	
+
+    public PwIconCustom(byte[] data) {
+        imageData = data;
+    }
+
+    @Deprecated
 	public PwIconCustom(UUID u, byte[] data) {
-		uuid = u;
 		imageData = data;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-		return result;
-	}
+	public Drawable getDrawable(Context context) {
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PwIconCustom other = (PwIconCustom) obj;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
-		return true;
+		if (imageData == null) {
+            return ContextCompat.getDrawable(context, R.drawable.ic99_blank);
+        }
+		Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+		// Could not understand custom icon
+		if (bitmap == null) {
+            return ContextCompat.getDrawable(context, R.drawable.ic99_blank);
+        }
+		bitmap = Bitmap.createScaledBitmap(bitmap, SIZE, SIZE, true);
+
+        return BitmapDrawableCompat.getBitmapDrawable(context.getResources(), bitmap);
 	}
 }

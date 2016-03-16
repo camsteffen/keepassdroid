@@ -18,6 +18,8 @@
   along with KeePassDroid.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
+	<color name="primary">#1565C0</color>
+	<color name="primary_dark">#0D47A1</color>
 	<color name="blue_highlight">#0000dd</color>
 	<color name="group">#ffffff</color>
 	<color name="icon_background">#555555</color>

@@ -19,31 +19,30 @@
  */
 package com.keepassdroid.fileselect;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.android.keepass.R;
-import com.keepassdroid.compat.EditorCompat;
-import com.keepassdroid.utils.UriUtil;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import com.android.keepass.R;
+import com.keepassdroid.compat.EditorCompat;
+import com.keepassdroid.utils.UriUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecentFileHistory {
 
     private static String DB_KEY = "recent_databases";
     private static String KEYFILE_KEY = "recent_keyfiles";
 
-    private List<String> databases = new ArrayList<String>();
-    private List<String> keyfiles = new ArrayList<String>();
+    private List<String> recentDatabases = new ArrayList<>();
+    private List<String> keyfiles = new ArrayList<>();
     private Context ctx;
     private SharedPreferences prefs;
-    private OnSharedPreferenceChangeListener listner;
+    private OnSharedPreferenceChangeListener listener;
     private boolean enabled;
     private boolean init = false;
 
@@ -52,7 +51,7 @@ public class RecentFileHistory {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         enabled = prefs.getBoolean(ctx.getString(R.string.recentfile_key), ctx.getResources().getBoolean(R.bool.recentfile_default));
-        listner = new OnSharedPreferenceChangeListener() {
+        listener = new OnSharedPreferenceChangeListener() {
 
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
@@ -62,7 +61,7 @@ public class RecentFileHistory {
                 }
             }
         };
-        prefs.registerOnSharedPreferenceChangeListener(listner);
+        prefs.registerOnSharedPreferenceChangeListener(listener);
     }
 
     private synchronized void init() {
@@ -83,22 +82,22 @@ public class RecentFileHistory {
                 return false;
             }
 
-            databases.clear();
+            recentDatabases.clear();
             keyfiles.clear();
 
             FileDbHelper helper = new FileDbHelper(ctx);
             helper.open();
             Cursor cursor = helper.fetchAllFiles();
 
-            int dbIndex = cursor.getColumnIndex(FileDbHelper.KEY_FILE_FILENAME);
-            int keyIndex = cursor.getColumnIndex(FileDbHelper.KEY_FILE_KEYFILE);
+            int dbIndex = cursor.getColumnIndex(FileDbHelper.COLUMN_FILENAME);
+            int keyIndex = cursor.getColumnIndex(FileDbHelper.COLUMN_KEYFILE);
 
             if(cursor.moveToFirst()) {
                 while (cursor.moveToNext()) {
                     String filename = cursor.getString(dbIndex);
                     String keyfile = cursor.getString(keyIndex);
 
-                    databases.add(filename);
+                    recentDatabases.add(filename);
                     keyfiles.add(keyfile);
                 }
             }
@@ -126,7 +125,7 @@ public class RecentFileHistory {
         return db.exists();
     }
 
-    public void createFile(Uri uri, Uri keyUri) {
+    public void addFile(Uri uri, Uri keyUri) {
         if (!enabled || uri == null) return;
 
         init();
@@ -134,7 +133,7 @@ public class RecentFileHistory {
         // Remove any existing instance of the same filename
         deleteFile(uri, false);
 
-        databases.add(0, uri.toString());
+        recentDatabases.add(0, uri.toString());
 
         String key = (keyUri == null) ? "" : keyUri.toString();
         keyfiles.add(0, key);
@@ -143,17 +142,9 @@ public class RecentFileHistory {
         savePrefs();
     }
 
-    public boolean hasRecentFiles() {
-        if (!enabled) return false;
-
-        init();
-
-        return databases.size() > 0;
-    }
-
     public String getDatabaseAt(int i) {
         init();
-        return databases.get(i);
+        return recentDatabases.get(i);
     }
 
     public String getKeyfileAt(int i) {
@@ -162,12 +153,12 @@ public class RecentFileHistory {
     }
 
     private void loadPrefs() {
-        loadList(databases, DB_KEY);
+        loadList(recentDatabases, DB_KEY);
         loadList(keyfiles, KEYFILE_KEY);
     }
 
     private void savePrefs() {
-        saveList(DB_KEY, databases);
+        saveList(DB_KEY, recentDatabases);
         saveList(KEYFILE_KEY, keyfiles);
     }
 
@@ -203,10 +194,10 @@ public class RecentFileHistory {
         String uriName = uri.toString();
         String fileName = uri.getPath();
 
-        for (int i = 0; i < databases.size(); i++) {
-            String entry = databases.get(i);
+        for (int i = 0; i < recentDatabases.size(); i++) {
+            String entry = recentDatabases.get(i);
             if (uriName.equals(entry) || fileName.equals(entry)) {
-                databases.remove(i);
+                recentDatabases.remove(i);
                 keyfiles.remove(i);
                 break;
             }
@@ -217,10 +208,9 @@ public class RecentFileHistory {
         }
     }
 
-    public List<String> getDbList() {
+    public List<String> getRecentDBList() {
         init();
-
-        return databases;
+        return recentDatabases;
     }
 
     public Uri getFileByName(Uri database) {
@@ -228,9 +218,9 @@ public class RecentFileHistory {
 
         init();
 
-        int size = databases.size();
+        int size = recentDatabases.size();
         for (int i = 0; i < size; i++) {
-            if (UriUtil.equalsDefaultfile(database,databases.get(i))) {
+            if (UriUtil.equalsDefaultfile(database, recentDatabases.get(i))) {
                 return UriUtil.parseDefaultFile(keyfiles.get(i));
             }
         }
@@ -241,7 +231,7 @@ public class RecentFileHistory {
     public void deleteAll() {
         init();
 
-        databases.clear();
+        recentDatabases.clear();
         keyfiles.clear();
 
         savePrefs();
@@ -252,7 +242,7 @@ public class RecentFileHistory {
 
         keyfiles.clear();
 
-        int size = databases.size();
+        int size = recentDatabases.size();
         for (int i = 0; i < size; i++) {
             keyfiles.add("");
         }
@@ -261,9 +251,9 @@ public class RecentFileHistory {
     }
 
     private void trimLists() {
-        int size = databases.size();
+        int size = recentDatabases.size();
         for (int i = FileDbHelper.MAX_FILES; i < size; i++) {
-            databases.remove(i);
+            recentDatabases.remove(i);
             keyfiles.remove(i);
         }
     }

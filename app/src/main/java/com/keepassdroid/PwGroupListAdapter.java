@@ -19,130 +19,138 @@
  */
 package com.keepassdroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import com.android.keepass.R;
+import com.keepassdroid.database.PwEntry;
+import com.keepassdroid.database.PwGroup;
+import com.keepassdroid.database.PwItem;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-
-import com.android.keepass.R;
-import com.keepassdroid.database.PwEntry;
-import com.keepassdroid.database.PwGroup;
-import com.keepassdroid.view.PwEntryView;
-import com.keepassdroid.view.PwGroupView;
-
 public class PwGroupListAdapter extends BaseAdapter {
 
-	private GroupBaseActivity mAct;
-	private PwGroup mGroup;
-	private List<PwGroup> groupsForViewing;
-	private List<PwEntry> entriesForViewing;
-	private Comparator<PwEntry> entryComp = new PwEntry.EntryNameComparator();
-	private Comparator<PwGroup> groupComp = new PwGroup.GroupNameComparator();
-	private SharedPreferences prefs;
-	
-	public PwGroupListAdapter(GroupBaseActivity act, PwGroup group) {
-		mAct = act;
-		mGroup = group;
-		prefs = PreferenceManager.getDefaultSharedPreferences(act);
-		
-		filterAndSort();
-		
-	}
-	
-	@Override
-	public void notifyDataSetChanged() {
-		super.notifyDataSetChanged();
-		
-		filterAndSort();
-	}
+    private static final int GROUP = 0;
+    private static final int ENTRY = 1;
+    private final LayoutInflater mInflater;
 
-	@Override
-	public void notifyDataSetInvalidated() {
-		super.notifyDataSetInvalidated();
-		
-		filterAndSort();
-	}
+    private Context context;
+    private PwGroup mGroup;
+    private List<PwGroup> groupsForViewing;
+    private List<PwEntry> entriesForViewing;
+    private Comparator<PwEntry> entryComp = new PwEntry.EntryNameComparator();
+    private Comparator<PwGroup> groupComp = new PwGroup.GroupNameComparator();
+    private SharedPreferences prefs;
 
-	private void filterAndSort() {
-		entriesForViewing = new ArrayList<PwEntry>();
-		
-		for (int i = 0; i < mGroup.childEntries.size(); i++) {
-			PwEntry entry = mGroup.childEntries.get(i);
-			if ( ! entry.isMetaStream() ) {
-				entriesForViewing.add(entry);
-			}
-		}
-		
-		boolean sortLists = prefs.getBoolean(mAct.getString(R.string.sort_key),	mAct.getResources().getBoolean(R.bool.sort_default)); 
-		if ( sortLists ) {
-			groupsForViewing = new ArrayList<PwGroup>(mGroup.childGroups);
-			
-			Collections.sort(entriesForViewing, entryComp);
-			Collections.sort(groupsForViewing, groupComp);
-		} else {
-			groupsForViewing = mGroup.childGroups;
-		}
-	}
-	
-	public int getCount() {
-		
-		return groupsForViewing.size() + entriesForViewing.size();
-	}
+    public PwGroupListAdapter(Context context, PwGroup group) {
+        this.context = context;
+        mGroup = group;
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-	public Object getItem(int position) {
-		return position;
-	}
+        filterAndSort();
+    }
 
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
 
-	public View getView(int position, View convertView, ViewGroup parent) {
-		int size = groupsForViewing.size();
-		
-		if ( position < size ) { 
-			return createGroupView(position, convertView);
-		} else {
-			return createEntryView(position - size, convertView);
-		}
-	}
+        filterAndSort();
+    }
 
-	private View createGroupView(int position, View convertView) {
-		PwGroup group = groupsForViewing.get(position);
-		PwGroupView gv;
-		
-		if (convertView == null || !(convertView instanceof PwGroupView)) {
-	
-			gv = PwGroupView.getInstance(mAct, group);
-		} 
-		else {
-			gv = (PwGroupView) convertView;
-			gv.convertView(group);
-			
-		}
-		
-		return gv;
-	}
+    @Override
+    public void notifyDataSetInvalidated() {
+        super.notifyDataSetInvalidated();
 
-	private PwEntryView createEntryView(int position, View convertView) {
-		PwEntry entry = entriesForViewing.get(position);
-		PwEntryView ev;
+        filterAndSort();
+    }
 
-		if (convertView == null || !(convertView instanceof PwEntryView)) {
-			ev = PwEntryView.getInstance(mAct, entry, position);
-		}
-		else {
-			ev = (PwEntryView) convertView;
-			ev.convertView(entry, position);
-		}
+    private void filterAndSort() {
+        entriesForViewing = new ArrayList<>();
+        for(PwEntry entry : mGroup.childEntries) {
+            if(!entry.isMetaStream())
+                entriesForViewing.add(entry);
+        }
 
-		return ev;
-	}
+        boolean sortLists = prefs.getBoolean(context.getString(R.string.sort_key), context.getResources().getBoolean(R.bool.sort_default));
+        if (sortLists) {
+            groupsForViewing = new ArrayList<>(mGroup.childGroups);
+
+            Collections.sort(entriesForViewing, entryComp);
+            Collections.sort(groupsForViewing, groupComp);
+        } else {
+            groupsForViewing = mGroup.childGroups;
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return groupsForViewing.size() + entriesForViewing.size();
+    }
+
+    @Override
+    public PwItem getItem(int position) {
+        if (position < groupsForViewing.size()) {
+            return groupsForViewing.get(position);
+        } else {
+            return entriesForViewing.get(position - groupsForViewing.size());
+        }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    private static class ViewHolder {
+        TextView textView;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            switch (getItemViewType(position)) {
+                case GROUP:
+                    convertView = mInflater.inflate(R.layout.group_list_entry, parent, false);
+                    holder.textView = (TextView) convertView.findViewById(R.id.group_name);
+                    break;
+                case ENTRY:
+                    convertView = mInflater.inflate(R.layout.entry_list_entry, parent, false);
+                    holder.textView = (TextView) convertView.findViewById(R.id.entry_name);
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.textView.setText(getItem(position).getName());
+        return convertView;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2; // groups and entries
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position < groupsForViewing.size()) {
+            return GROUP;
+        } else {
+            return ENTRY;
+        }
+    }
 
 }

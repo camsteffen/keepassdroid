@@ -19,18 +19,17 @@
  */
 package com.keepassdroid.database.edit;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
-
 import com.keepassdroid.Database;
 import com.keepassdroid.database.PwDatabase;
 import com.keepassdroid.database.exception.InvalidKeyFileException;
 import com.keepassdroid.dialog.PasswordEncodingDialogHelper;
 import com.keepassdroid.utils.UriUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class SetPassword extends RunnableOnFinish {
 	

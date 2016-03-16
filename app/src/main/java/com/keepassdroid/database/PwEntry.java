@@ -19,14 +19,17 @@
  */
 package com.keepassdroid.database;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import com.keepassdroid.Database;
+import com.keepassdroid.EntryFragment;
+import com.keepassdroid.database.iterator.EntrySearchStringIterator;
+
 import java.util.Comparator;
 import java.util.Date;
 import java.util.UUID;
 
-import com.keepassdroid.database.iterator.EntrySearchStringIterator;
-import com.keepassdroid.utils.SprEngine;
-
-public abstract class PwEntry implements Cloneable {
+public abstract class PwEntry extends PwItem implements Cloneable {
 
 	protected static final String PMS_TAN_ENTRY = "<TAN>";
 	
@@ -76,8 +79,13 @@ public abstract class PwEntry implements Cloneable {
 	public PwEntry clone(boolean deepStrings) {
 		return (PwEntry) clone();
 	}
-	
-	public void assign(PwEntry source) {
+
+    // Determine if this is a MetaStream entry
+    public boolean isMetaStream() {
+        return false;
+    }
+
+    public void assign(PwEntry source) {
 		icon = source.icon;
 	}
 	
@@ -128,7 +136,7 @@ public abstract class PwEntry implements Cloneable {
 	public abstract void setExpiryTime(Date expires);
 	
 	
-	public PwIcon getIcon() {
+	public PwIcon getIcon(Database db) {
 		return icon;
 	}
 	
@@ -136,7 +144,7 @@ public abstract class PwEntry implements Cloneable {
 		return getTitle().equals(PMS_TAN_ENTRY) && (getUsername().length() > 0);
 	}
 
-	public String getDisplayTitle() {
+	public String getName() {
 		if ( isTan() ) {
 			return PMS_TAN_ENTRY + " " + getUsername();
 		} else {
@@ -144,11 +152,6 @@ public abstract class PwEntry implements Cloneable {
 		}
 	}
 
-
-	public boolean isMetaStream() {
-		return false;
-	}
-	
 	public EntrySearchStringIterator stringIterator() {
 		return EntrySearchStringIterator.getInstance(this);
 	}
@@ -176,4 +179,12 @@ public abstract class PwEntry implements Cloneable {
 		return false;
 	}
 
+	@Override
+    public Fragment createFragment() {
+		EntryFragment fragment = new EntryFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(EntryFragment.KEY_ENTRY, getUUID());
+		fragment.setArguments(args);
+		return fragment;
+	}
 }

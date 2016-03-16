@@ -28,20 +28,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.keepass.R;
-import com.keepassdroid.app.App;
 import com.keepassdroid.database.edit.FileOnFinish;
 import com.keepassdroid.database.edit.OnFinish;
 import com.keepassdroid.database.edit.SetPassword;
 import com.keepassdroid.utils.EmptyUtils;
 import com.keepassdroid.utils.UriUtil;
 
-public class SetPasswordDialog extends CancelDialog {
+class SetPasswordDialog extends CancelDialog {
 
 	private byte[] masterKey;
 	private Uri mKeyfile;
 	private FileOnFinish mFinish;
+
+	Database db; // TODO
 		
 	public SetPasswordDialog(Context context) {
 		super(context);
@@ -85,7 +85,7 @@ public class SetPasswordDialog extends CancelDialog {
 					return;
 				}
 				
-				TextView keyfileView = (TextView) findViewById(R.id.pass_keyfile);
+				TextView keyfileView = (TextView) findViewById(R.id.keyfile_path);
 				Uri keyfile = UriUtil.parseDefaultFile(keyfileView.getText().toString());
 				mKeyfile = keyfile;
 				
@@ -96,7 +96,7 @@ public class SetPasswordDialog extends CancelDialog {
 					
 				}
 				
-				SetPassword sp = new SetPassword(getContext(), App.getDB(), pass, keyfile, new AfterSave(mFinish, new Handler()));
+				SetPassword sp = new SetPassword(getContext(), db, pass, keyfile, new AfterSave(mFinish, new Handler()));
 				final ProgressTask pt = new ProgressTask(getContext(), sp, R.string.saving_database);
 				boolean valid = sp.validatePassword(getContext(), new OnClickListener() {
 					

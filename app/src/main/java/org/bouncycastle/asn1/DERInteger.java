@@ -1,9 +1,9 @@
 package org.bouncycastle.asn1;
 
+import org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.math.BigInteger;
-
-import org.bouncycastle.util.Arrays;
 
 public class DERInteger
     extends ASN1Object

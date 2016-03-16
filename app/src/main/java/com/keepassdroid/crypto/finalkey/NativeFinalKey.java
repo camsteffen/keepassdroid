@@ -19,9 +19,9 @@
  */
 package com.keepassdroid.crypto.finalkey;
 
-import java.io.IOException;
-
 import com.keepassdroid.crypto.NativeLib;
+
+import java.io.IOException;
 
 
 public class NativeFinalKey extends FinalKey {

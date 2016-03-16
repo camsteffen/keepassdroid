@@ -20,7 +20,6 @@
 package com.keepassdroid.database.exception;
 
 import android.net.Uri;
-
 import com.keepassdroid.utils.EmptyUtils;
 
 import java.io.FileNotFoundException;

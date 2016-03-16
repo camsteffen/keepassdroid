@@ -19,11 +19,11 @@
  */
 package com.keepassdroid.compat;
 
-import java.lang.reflect.Constructor;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+
+import java.lang.reflect.Constructor;
 
 // This compatiblity hack can go away when support for Android 1.5 api level 3 is dropped
 public class BitmapDrawableCompat {

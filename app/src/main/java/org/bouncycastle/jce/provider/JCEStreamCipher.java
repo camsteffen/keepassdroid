@@ -1,21 +1,8 @@
 package org.bouncycastle.jce.provider;
 
-import org.bouncycastle.crypto.BlockCipher;
-import org.bouncycastle.crypto.CipherParameters;
-import org.bouncycastle.crypto.DataLengthException;
-import org.bouncycastle.crypto.StreamBlockCipher;
-import org.bouncycastle.crypto.StreamCipher;
-//import org.bouncycastle.crypto.engines.BlowfishEngine;
-//import org.bouncycastle.crypto.engines.DESEngine;
-//import org.bouncycastle.crypto.engines.DESedeEngine;
-//import org.bouncycastle.crypto.engines.HC128Engine;
-//import org.bouncycastle.crypto.engines.HC256Engine;
-//import org.bouncycastle.crypto.engines.RC4Engine;
+import org.bouncycastle.crypto.*;
 import org.bouncycastle.crypto.engines.Salsa20Engine;
-//import org.bouncycastle.crypto.engines.SkipjackEngine;
 import org.bouncycastle.crypto.engines.TwofishEngine;
-//import org.bouncycastle.crypto.engines.VMPCEngine;
-//import org.bouncycastle.crypto.engines.VMPCKSA3Engine;
 import org.bouncycastle.crypto.modes.CFBBlockCipher;
 import org.bouncycastle.crypto.modes.OFBBlockCipher;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -29,12 +16,18 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEParameterSpec;
 import javax.crypto.spec.RC2ParameterSpec;
 import javax.crypto.spec.RC5ParameterSpec;
-import java.security.AlgorithmParameters;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
+
+//import org.bouncycastle.crypto.engines.BlowfishEngine;
+//import org.bouncycastle.crypto.engines.DESEngine;
+//import org.bouncycastle.crypto.engines.DESedeEngine;
+//import org.bouncycastle.crypto.engines.HC128Engine;
+//import org.bouncycastle.crypto.engines.HC256Engine;
+//import org.bouncycastle.crypto.engines.RC4Engine;
+//import org.bouncycastle.crypto.engines.SkipjackEngine;
+//import org.bouncycastle.crypto.engines.VMPCEngine;
+//import org.bouncycastle.crypto.engines.VMPCKSA3Engine;
 
 @SuppressWarnings("unchecked")
 public class JCEStreamCipher

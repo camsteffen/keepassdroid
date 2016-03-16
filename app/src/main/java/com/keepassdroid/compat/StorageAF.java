@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.android.keepass.R;
 
 import java.lang.reflect.Field;
@@ -45,7 +44,9 @@ public class StorageAF {
         }
     }
 
-    public static boolean supportsStorageFramework() { return BuildCompat.getSdkVersion() >= BuildCompat.VERSION_KITKAT; }
+    public static boolean supportsStorageFramework() {
+        return BuildCompat.getSdkVersion() >= BuildCompat.VERSION_KITKAT;
+    }
 
     public static boolean useStorageFramework(Context ctx) {
         if (!supportsStorageFramework()) { return false; }

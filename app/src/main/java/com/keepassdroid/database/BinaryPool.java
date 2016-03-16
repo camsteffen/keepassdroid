@@ -19,12 +19,12 @@
  */
 package com.keepassdroid.database;
 
+import com.keepassdroid.database.security.ProtectedBinary;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.keepassdroid.database.security.ProtectedBinary;
 
 public class BinaryPool {
 	private HashMap<String, ProtectedBinary> pool = new HashMap<String, ProtectedBinary>();

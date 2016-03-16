@@ -55,7 +55,7 @@
     <string name="database">Datubasea</string>
     <string name="decrypting_db">Datubasearen datuak desenkriptatzen&#8230;</string>
     <string name="decrypting_entry">Sarrera desenkriptatzen</string>
-    <string name="default_checkbox">Hau erabili modu lehenetsitako datubase gisa</string>
+    <string name="set_default_database">Hau erabili modu lehenetsitako datubase gisa</string>
     <string name="digits">Zenbakiak</string>
     <string name="disclaimer_formal">KeePassDroid Copyright 2009&#8211;2012 Brian Pellin ez dakar inolako bermerik; Lan hau software librea da; banatu edo/eta aldatu egin dezakezu GNU General Public License bigarren bertsioaren baldintzapean.</string>
     <string name="ellipsis">\u2026</string>
@@ -76,7 +76,7 @@
     <string name="entry_url">URLa: </string>
     <string name="entry_user_name">Erabiltzaile izena: </string>
     <string name="error_arc4">ArcFour stream zifratze sisterako ez dago euskarririk..</string>
-    <string name="error_can_not_handle_uri">KeePassDroid-ek ezin dut uri hau kudeatu.</string>
+    <string name="error_cannot_handle_uri">KeePassDroid-ek ezin dut uri hau kudeatu.</string>
     <string name="error_could_not_create_group">Errorea taldea sortzerakoan.</string>
     <string name="error_could_not_create_parent">Ezin izan da aita-direktorioa sortu.</string>
     <string name="error_database_exists">Fitxategia esistitzen da.</string>
@@ -98,7 +98,7 @@
     <string name="error_wrong_length">Eremuaren luzeran entero positibo bat sartu</string>
     <string name="field_name">Eremuaren izena</string>
     <string name="field_value">Eremuaren balorea</string>
-    <string name="FileNotFound">Fitxategi ez aurkitua.</string>
+    <string name="file_not_found">Fitxategi ez aurkitua.</string>
     <string name="file_browser">Fitxategien nabigatzailea</string>
     <string name="generate_password">Pasahitza sortu</string>
     <string name="group">Taldea</string>
@@ -118,7 +118,7 @@
     <string name="InvalidPassword">Pasahitz edo gako fitxategi baliogabea.</string>
     <string name="invalid_algorithm">Algoritmo baliogabea.</string>
     <string name="invalid_db_sig">Datubase formato ez ezaguna.</string>
-    <string name="keyfile_does_not_exist">Gako fitxategia ez da esistitzen.</string>
+    <string name="key_file_not_found">Gako fitxategia ez da esistitzen.</string>
     <string name="keyfile_is_empty">Gako fitxategia hutsik dago.</string>
     <string name="length">Luzera</string>
     <string name="list_size_title">Talde listaren tamaina</string>
@@ -128,12 +128,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Pasahitza estali</string>
     <string name="maskpass_summary">Pasahitza estali modu lehenetsian</string>
-    <string name="menu_about">Honi buruz</string>
+    <string name="about">Honi buruz</string>
     <string name="menu_change_key">Gako Maisua Aldatu</string>
     <string name="menu_copy_pass">Pasahitza Kopiatu</string>
     <string name="menu_copy_user">Erabiltzailea Kopiatu</string>
     <string name="menu_create">Sortu</string>
-    <string name="menu_app_settings">Ezarpenak</string>
+    <string name="settings">Ezarpenak</string>
     <string name="menu_db_settings">Datubasearen ezarpenak</string>
     <string name="menu_delete">Ezabatu</string>
     <string name="menu_donate">Dirua eman</string>
@@ -141,7 +141,7 @@
     <string name="menu_hide_password">Pasahitza Ezkutatu</string>
     <string name="menu_homepage">Hasierako orrira joan</string>
     <string name="menu_lock">Datubasea Blokeatu</string>
-    <string name="menu_open">Ireki</string>
+    <string name="open">Ireki</string>
     <string name="menu_rename">Izena aldatu</string>
     <string name="menu_search">Bilatu</string>
     <string name="menu_showpass">Pasahitza erakutsi</string>

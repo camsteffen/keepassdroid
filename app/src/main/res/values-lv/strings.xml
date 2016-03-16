@@ -35,7 +35,7 @@
     <string name="database">Datu bāze</string>
     <string name="decrypting_db">Datu bāzes atšifrēšana…</string>
     <string name="decrypting_entry">Ieraksta atšifrēšana</string>
-    <string name="default_checkbox">Izmantot šo kā manu noklusējuma datu bāzi</string>
+    <string name="set_default_database">Izmantot šo kā manu noklusējuma datu bāzi</string>
     <string name="digits">Cipari</string>
     <string name="disclaimer_formal">Paroles Aurortiesības 2009–2012 Brian Pellin.</string>
     <string name="ellipsis">…</string>
@@ -55,7 +55,7 @@
     <string name="entry_url">URL:</string>
     <string name="entry_user_name">Lietotāja vārds:</string>
     <string name="error_arc4">ArcFour plūsmas šifrs netiek atbalstīts.</string>
-    <string name="error_can_not_handle_uri">Neizdevās pātiet uz norādīto adresi.</string>
+    <string name="error_cannot_handle_uri">Neizdevās pātiet uz norādīto adresi.</string>
     <string name="error_could_not_create_group">Neizdevās izveidot grupu.</string>
     <string name="error_could_not_create_parent">Neizdevās izveidot mātes direktoriju.</string>
     <string name="error_database_exists">Šāds fails jau pastāv.</string>
@@ -77,7 +77,7 @@
     <string name="error_wrong_length">Norādiet garumu lielāku par nulli</string>
     <string name="field_name">Lauka nosaukums</string>
     <string name="field_value">Lauka vērtība</string>
-    <string name="FileNotFound">Fails nav atrasts.</string>
+    <string name="file_not_found">Fails nav atrasts.</string>
     <string name="file_browser">Failu pārlūks</string>
     <string name="generate_password">Ģenerēt Paroli</string>
     <string name="group">Grupa</string>
@@ -97,7 +97,7 @@
     <string name="InvalidPassword">Nederīga parole vai atslēgas fails.</string>
     <string name="invalid_algorithm">Nederīgs algoritms.</string>
     <string name="invalid_db_sig">Datu bāzes formāts nav atpazīts.</string>
-    <string name="keyfile_does_not_exist">Atslēgas fails nepastāv.</string>
+    <string name="key_file_not_found">Atslēgas fails nepastāv.</string>
     <string name="keyfile_is_empty">Atslēgas fails ir tukšs.</string>
     <string name="length">Garums</string>
     <string name="list_size_title">Grupu saraksta teksta izmērs</string>
@@ -107,12 +107,12 @@
     <string name="MaskedPassword">*****</string>
     <string name="maskpass_title">Sēpt paroles</string>
     <string name="maskpass_summary">Sēpt paroles *****</string>
-    <string name="menu_about">Par</string>
+    <string name="about">Par</string>
     <string name="menu_change_key">Mainīt galveno paroli</string>
     <string name="menu_copy_pass">Kopēt paroli</string>
     <string name="menu_copy_user">Kopēt lietotājvārdu</string>
     <string name="menu_create">Izveidot</string>
-    <string name="menu_app_settings">Iestatījumi</string>
+    <string name="settings">Iestatījumi</string>
     <string name="menu_db_settings">Datu bāzes iestatījumi</string>
     <string name="menu_delete">Dzēst</string>
     <string name="menu_donate">Ziedot</string>
@@ -120,7 +120,7 @@
     <string name="menu_hide_password">Paslēpt paroli</string>
     <string name="menu_homepage">Iet uz mājas lapu</string>
     <string name="menu_lock">Bloķēt datu bāzi</string>
-    <string name="menu_open">Atvērt</string>
+    <string name="open">Atvērt</string>
     <string name="menu_rename">Pārdēvēt</string>
     <string name="menu_search">Meklēšana</string>
     <string name="menu_showpass">Rādīt paroli</string>

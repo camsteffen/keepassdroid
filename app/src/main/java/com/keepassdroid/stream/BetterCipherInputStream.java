@@ -17,13 +17,12 @@
 
 package com.keepassdroid.stream;
 
+import javax.crypto.Cipher;
+import javax.crypto.NullCipher;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
-
-import javax.crypto.Cipher;
-import javax.crypto.NullCipher;
 
 /**
  * This class wraps an {@code InputStream} and a cipher so that {@code read()}

@@ -33,15 +33,12 @@ public class OnFinish implements Runnable {
 	protected boolean mSuccess;
 	protected String mMessage;
 	
-	protected OnFinish mOnFinish;
+	private OnFinish mOnFinish;
 	protected Handler mHandler;
 
 	public OnFinish() {
-	}
-	
-	public OnFinish(Handler handler) {
 		mOnFinish = null;
-		mHandler = handler;
+		mHandler = new Handler();
 	}
 	
 	public OnFinish(OnFinish finish, Handler handler) {

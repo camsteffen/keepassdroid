@@ -19,35 +19,23 @@
  */
 package com.keepassdroid.database.save;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.security.DigestOutputStream;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
+import com.keepassdroid.crypto.CipherFactory;
+import com.keepassdroid.database.*;
+import com.keepassdroid.database.exception.PwDbOutputException;
+import com.keepassdroid.stream.LEDataOutputStream;
+import com.keepassdroid.stream.NullOutputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import com.keepassdroid.crypto.CipherFactory;
-import com.keepassdroid.database.PwDatabaseV3;
-import com.keepassdroid.database.PwDbHeader;
-import com.keepassdroid.database.PwDbHeaderV3;
-import com.keepassdroid.database.PwEncryptionAlgorithm;
-import com.keepassdroid.database.PwEntryV3;
-import com.keepassdroid.database.PwGroup;
-import com.keepassdroid.database.PwGroupV3;
-import com.keepassdroid.database.exception.PwDbOutputException;
-import com.keepassdroid.stream.LEDataOutputStream;
-import com.keepassdroid.stream.NullOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.security.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PwDbV3Output extends PwDbOutput {
 	private PwDatabaseV3 mPM;

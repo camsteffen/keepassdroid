@@ -1,5 +1,6 @@
 package com.keepassdroid.database;
 
-public abstract class PwGroupId {
+import android.os.Parcelable;
 
+public abstract class PwGroupId implements Parcelable {
 }

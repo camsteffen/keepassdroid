@@ -3,23 +3,23 @@ apply plugin: 'com.android.model.application'
 model {
     android {
         compileSdkVersion 23
-        buildToolsVersion "23.0.2"
+        buildToolsVersion '23.0.2'
 
         defaultConfig {
-            applicationId "com.android.keepass"
+            applicationId 'com.android.keepass'
             minSdkVersion.apiLevel 7
-            targetSdkVersion.apiLevel 12
+            targetSdkVersion.apiLevel 23
             versionCode 151
-            versionName "2.0.6.1"
+            versionName '2.0.6.1'
 
-            testApplicationId "com.keepassdroid.tests"
-            testInstrumentationRunner "android.test.InstrumentationTestRunner"
+            testApplicationId 'com.keepassdroid.tests'
+            testInstrumentationRunner 'android.test.InstrumentationTestRunner'
 
             buildConfigFields {
                 create() {
-                    type "int"
-                    name "VALUE"
-                    value "1"
+                    type 'int'
+                    name 'VALUE'
+                    value '1'
                 }
             }
         }
@@ -36,34 +36,35 @@ model {
                 jni {
                     source {
                         srcDirs = [
-                                "src/main/jni/aes",
-                                "src/main/jni/final_key",
-                                "src/main/jni/sha"
+                                'src/main/jni/aes',
+                                'src/main/jni/final_key',
+                                'src/main/jni/sha'
                         ]
-                        exclude "**/aesxam.c"
-                        exclude "**/rfc3686.c"
-                        exclude "**/tablegen.c"
-                        exclude "**/pwd2key.c"
-                        exclude "**/sha1b.c"
-                        exclude "**/sha2b.c"
-                        exclude "**/shasum.c"
+                        exclude '**/aesxam.c'
+                        exclude '**/rfc3686.c'
+                        exclude '**/tablegen.c'
+                        exclude '**/pwd2key.c'
+                        exclude '**/sha1b.c'
+                        exclude '**/sha2b.c'
+                        exclude '**/shasum.c'
                     }
                 }
             }
         }
 
         ndk {
-            moduleName "libfinal-key"
+            moduleName 'libfinal-key'
 
-            ldLibs.add("log")
+            ldLibs.add('log')
             CFlags.add("-I${file("src/main/jni/aes")}".toString())
             CFlags.add("-I${file("src/main/jni/sha")}".toString())
-            CFlags.add("-DUSE_SHA256")
+            CFlags.add('-DUSE_SHA256')
         }
     }
 }
 
 dependencies {
+    compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:appcompat-v7:23.2.1'
     androidTestCompile files('libs/junit4.jar')
     // Set this dependency if you want to use Hamcrest matching

@@ -19,21 +19,20 @@
  */
 package com.keepassdroid.icons;
 
-import org.apache.commons.collections.map.AbstractReferenceMap;
-import org.apache.commons.collections.map.ReferenceMap;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-
 import com.android.keepass.R;
 import com.keepassdroid.compat.BitmapDrawableCompat;
 import com.keepassdroid.database.PwIcon;
 import com.keepassdroid.database.PwIconCustom;
 import com.keepassdroid.database.PwIconStandard;
+import org.apache.commons.collections.map.AbstractReferenceMap;
+import org.apache.commons.collections.map.ReferenceMap;
 
+@Deprecated
 public class DrawableFactory {
 	private static Drawable blank = null;
 	private static int blankWidth = -1;
@@ -55,7 +54,8 @@ public class DrawableFactory {
 		Drawable draw = getIconDrawable(res, icon);
 		iv.setImageDrawable(draw);
 	}
-	
+
+	@Deprecated
 	private Drawable getIconDrawable(Resources res, PwIcon icon) {
 		if (icon instanceof PwIconStandard) {
 			return getIconDrawable(res, (PwIconStandard) icon);
@@ -71,7 +71,8 @@ public class DrawableFactory {
 			blankHeight = blank.getIntrinsicHeight();
 		}
 	}
-	
+
+	@Deprecated
 	public Drawable getIconDrawable(Resources res, PwIconStandard icon) {
 		int resId = Icons.iconToResId(icon.iconId);
 		
@@ -84,13 +85,14 @@ public class DrawableFactory {
 		return draw;
 	}
 
+	@Deprecated
 	public Drawable getIconDrawable(Resources res, PwIconCustom icon) {
 		initBlank(res);
 		if (icon == null) {
 			return blank;
 		}
 		
-		Drawable draw = (Drawable) customIconMap.get(icon.uuid);
+		Drawable draw = (Drawable) customIconMap.get(icon);
 		
 		if (draw == null) {
 			if (icon.imageData == null) {
@@ -107,7 +109,7 @@ public class DrawableFactory {
 			bitmap = resize(bitmap);
 			
 			draw = BitmapDrawableCompat.getBitmapDrawable(res, bitmap);
-			customIconMap.put(icon.uuid, draw);
+			customIconMap.put(icon, draw);
 		}
 		
 		return draw;
@@ -117,7 +119,7 @@ public class DrawableFactory {
 	 * @param bitmap
 	 * @return
 	 */
-	private Bitmap resize(Bitmap bitmap) {
+	public static Bitmap resize(Bitmap bitmap) {
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
 		

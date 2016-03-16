@@ -28,12 +28,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.android.keepass.KeePass;
 import com.android.keepass.R;
+import com.keepassdroid.app.App;
 import com.keepassdroid.password.PasswordGenerator;
 
-public class GeneratePasswordActivity extends LockCloseActivity {
+public class GeneratePasswordActivity extends LockingActivity {
 	private static final int[] BUTTON_IDS = new int [] {R.id.btn_length6, R.id.btn_length8, R.id.btn_length12, R.id.btn_length16};
 	
 	public static void Launch(Activity act) {
@@ -55,7 +54,7 @@ public class GeneratePasswordActivity extends LockCloseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.generate_password);
-		setResult(KeePass.EXIT_NORMAL);
+		setResult(App.EXIT_NORMAL);
 		
 		for (int id : BUTTON_IDS) {
         	Button button = (Button) findViewById(id);
